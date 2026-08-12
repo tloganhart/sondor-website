@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sondor</title>
+<meta name="description" content="A writing tool built on your own words. Early access opening in small groups.">
+<meta property="og:title" content="Sondor">
+<meta property="og:description" content="A writing tool built on your own words. Early access opening in small groups.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23050D14'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23C9A44C' stroke-width='2.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Hanken+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --surface:#050D14;
+    --surface-lift:#0A1621;
+    --amber:#C9A44C;
+    --amber-text:#B8954A;
+    --text:#E6E3DC;
+    --text-muted:#9D9A91;
+    --hairline:rgba(201,164,76,0.16);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html{-webkit-text-size-adjust:100%}
+
+  body{
+    background:var(--surface);
+    color:var(--text);
+    font-family:'Hanken Grotesk',system-ui,sans-serif;
+    line-height:1.6;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:clamp(2rem,6vw,4rem) clamp(1.25rem,5vw,2rem) 3rem;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  /* ambient glow, deliberately faint */
+  body::before{
+    content:"";
+    position:fixed;
+    top:-10%;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(1100px,100vw);
+    height:min(1100px,100vw);
+    background:radial-gradient(circle,rgba(201,164,76,0.07) 0%,rgba(201,164,76,0.02) 38%,transparent 68%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  main{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:660px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+
+  .wordmark{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:600;
+    font-size:2rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--amber);
+    margin-bottom:clamp(3rem,9vw,5rem);
+    opacity:0;
+    animation:rise 0.9s cubic-bezier(.2,.7,.3,1) 0.1s forwards;
+  }
+
+  /* the demonstration */
+  .demo{
+    width:100%;
+    background:var(--surface-lift);
+    border:1px solid var(--hairline);
+    border-radius:3px;
+    padding:clamp(1.5rem,5vw,2.25rem);
+    text-align:left;
+    font-family:'Newsreader',Georgia,serif;
+    font-size:clamp(1.05rem,3.4vw,1.3rem);
+    line-height:1.75;
+    opacity:0;
+    animation:rise 0.9s cubic-bezier(.2,.7,.3,1) 0.45s forwards;
+  }
+
+  .demo .filler{
+    color:var(--text-muted);
+    transition:opacity 1.3s ease,color 1.3s ease;
+  }
+
+  .demo .own{
+    color:var(--text-muted);
+    transition:color 1.3s ease,text-shadow 1.3s ease;
+  }
+
+  .demo.revealed .filler{opacity:0.17}
+
+  .demo.revealed .own{
+    color:var(--text);
+    text-shadow:0 0 22px rgba(201,164,76,0.22);
+  }
+
+  .caption{
+    font-size:0.82rem;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    color:var(--amber-text);
+    margin-top:1.1rem;
+    opacity:0;
+    transition:opacity 0.9s ease;
+  }
+
+  .caption.shown{opacity:1}
+
+  h1{
+    font-family:'Newsreader',Georgia,serif;
+    font-weight:400;
+    font-size:clamp(2rem,7vw,3.1rem);
+    line-height:1.15;
+    letter-spacing:-0.015em;
+    margin-top:clamp(3rem,8vw,4.25rem);
+    opacity:0;
+    animation:rise 0.9s cubic-bezier(.2,.7,.3,1) 0.8s forwards;
+  }
+
+  .lede{
+    color:var(--text-muted);
+    font-size:clamp(1rem,3vw,1.1rem);
+    max-width:36rem;
+    margin-top:1.4rem;
+    opacity:0;
+    animation:rise 0.9s cubic-bezier(.2,.7,.3,1) 1s forwards;
+  }
+
+  .cta-wrap{
+    margin-top:clamp(2.5rem,7vw,3.5rem);
+    opacity:0;
+    animation:rise 0.9s cubic-bezier(.2,.7,.3,1) 1.2s forwards;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .cta{
+    display:inline-block;
+    font-family:'Hanken Grotesk',sans-serif;
+    font-weight:500;
+    font-size:1rem;
+    letter-spacing:0.02em;
+    color:var(--surface);
+    background:var(--amber);
+    padding:0.95rem 2.1rem;
+    border-radius:2px;
+    text-decoration:none;
+    transition:background 0.25s ease,transform 0.25s ease,box-shadow 0.25s ease;
+  }
+
+  .cta:hover,.cta:focus-visible{
+    background:#DCB55C;
+    transform:translateY(-1px);
+    box-shadow:0 6px 26px rgba(201,164,76,0.28);
+  }
+
+  .cta:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+
+  .note{
+    font-size:0.9rem;
+    color:var(--text-muted);
+    margin-top:1.1rem;
+  }
+
+  @keyframes rise{
+    from{opacity:0;transform:translateY(14px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before{animation:none!important;transition:none!important}
+    .wordmark,.demo,h1,.lede,.cta-wrap{opacity:1!important;transform:none!important}
+    .caption{opacity:1!important}
+    .demo .filler{opacity:0.17}
+    .demo .own{color:var(--text)}
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="wordmark">Sondor</div>
+
+  <div class="demo" id="demo">
+    <span class="filler">In today's fast-paced world, many of us struggle to find our voice.</span>
+    <span class="own">I spent six years telling people I wasn't a writer.</span>
+    <span class="filler">It is important to note that</span>
+    <span class="own">I wrote every single day of those six years.</span>
+    <span class="filler">Ultimately,</span>
+    <span class="own">I just never called it that.</span>
+  </div>
+  <div class="caption" id="caption">Only the words you actually said</div>
+
+  <h1>You already have the words.</h1>
+
+  <p class="lede">Sondor asks the questions that pull out what you actually think, then builds the piece from what you said. Nothing gets written for you.</p>
+
+  <div class="cta-wrap">
+    <a class="cta" href="https://discord.gg/k6Q3CFjkH" rel="noopener">Join the beta on Discord</a>
+    <p class="note">Early access is opening in small groups.</p>
+  </div>
+</main>
+
+<script>
+  (function(){
+    var demo = document.getElementById('demo');
+    var caption = document.getElementById('caption');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { demo.classList.add('revealed'); caption.classList.add('shown'); return; }
+    setTimeout(function(){ demo.classList.add('revealed'); }, 1700);
+    setTimeout(function(){ caption.classList.add('shown'); }, 2600);
+  })();
+</script>
+</body>
+</html>
