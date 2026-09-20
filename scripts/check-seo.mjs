@@ -12,7 +12,12 @@ for (const root of roots) for (const file of walk(root)) {
   const desc = decode(html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '');
   const h1s = (html.match(/<h1[\s>]/g) || []).length;
   const canonical = /<link rel="canonical"/.test(html);
-  const slug = file.replace(root, '');
+  // Separators normalised before the slug test below. Same Windows bug the
+  // copy lint had: join() builds a path with backslashes, the slug pattern
+  // only allows forward slashes, so EVERY page failed on "slug" locally while
+  // Cloudflare's Linux builder passed. The check itself is about the page
+  // name, not about which machine ran it.
+  const slug = file.replace(root, '').replace(/\\/g, '/');
   const problems = [];
   if (title.length < 55 || title.length > 60) problems.push(`title ${title.length} chars`);
   if (desc.length < 150 || desc.length > 160) problems.push(`description ${desc.length} chars`);

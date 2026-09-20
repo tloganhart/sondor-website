@@ -22,7 +22,13 @@ const soft = [
 let failures = 0;
 function walk(d) { return readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? walk(p) : p.endsWith('.html') ? [p] : []; }); }
 for (const root of roots) for (const file of walk(root)) {
-  const name = file.split('/').pop();
+  // Split on either separator. join() above builds a Windows path with
+  // backslashes, so splitting on '/' alone returned the whole path, the skip
+  // list below never matched, and the legal pages produced 16 false em-dash
+  // failures locally while Cloudflare's Linux builder stayed green. A lint
+  // that is red on one machine and green on another teaches people to ignore
+  // it, which is worse than not having it.
+  const name = file.split(/[\\/]/).pop();
   if (skip.has(name)) continue;
   const html = readFileSync(file, 'utf8');
   // Strip scripts/styles, then tags, keep text with paragraph breaks.

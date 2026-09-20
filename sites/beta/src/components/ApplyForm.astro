@@ -209,7 +209,7 @@ const endpoint = import.meta.env.PUBLIC_BETA_APPLY_ENDPOINT ?? '';
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         form.reset();
-        show('ok', `<h3>Application received</h3><p>Thanks, ${escapeHtml(payload.name)}. Every application is read by one person, so give it a few days. If it is a yes, the email carries your access code and the orientation details.</p>`);
+        show('ok', `<h3>Application received</h3><p>Thanks, ${escapeHtml(payload.name)}. Every application is read by one person, so give it a few days. If it is a yes, the email carries your access code and the orientation details. If it is a no, you will hear that too.</p>`);
       } catch {
         show('err', `<h3>That did not go through</h3><p>Nothing was lost, your answers are still in the form. Try again in a moment. If it keeps failing, email <a href="mailto:${email}">${email}</a> with the same answers and they will be counted.</p>`);
       } finally {
