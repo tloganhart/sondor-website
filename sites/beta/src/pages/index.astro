@@ -88,7 +88,6 @@ const description = 'Sondor is a writing tool that refuses to write for you. It 
             height="1000"
             loading="lazy"
             decoding="async"
-            style="width: 100%; max-width: 18rem; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-lg);"
           />
         </div>
       </div>
@@ -123,6 +122,17 @@ const description = 'Sondor is a writing tool that refuses to write for you. It 
   .tag { color: var(--text-muted); font-size: var(--text-lg); margin-block-start: var(--s-8); }
   .founder-side { display: grid; gap: var(--s-3); align-content: start; }
   .founder-side .photo { margin-block-start: var(--s-6); width: 100%; }
+  /* See the About page for the same fix: height auto, so the 4:5 ratio sets
+     the height rather than the height="1000" attribute pinning it. */
+  .photo img {
+    width: 100%;
+    max-width: 18rem;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 50% 20%;
+    border-radius: var(--radius-lg);
+  }
   .story p { font-size: var(--text-lg); line-height: 1.6; }
   .story .sign { font-size: var(--text-h3); margin-block-start: var(--s-8); }
   .form-panel :global(.apply) { max-width: none; }

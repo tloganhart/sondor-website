@@ -16,12 +16,11 @@ const description = 'Built by one content creator who wanted the efficiency of A
       </div>
       <div class="photo">
         <img
-          src="/founder-logan-hart.png"
+          src="/founder-logan-hart.webp"
           alt="Logan Hart, who built Sondor: a bearded man in a cream knit sweater, resting his chin on his hand and smiling slightly, in front of shelves of books."
           width="1600"
           height="2000"
           decoding="async"
-          style="width: 100%; max-width: 26rem; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-lg);"
         />
       </div>
     </div>
@@ -73,6 +72,22 @@ const description = 'Built by one content creator who wanted the efficiency of A
   .page-head h1 { margin-block-start: var(--s-3); font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.75rem); }
   .page-head .lede { margin-block-start: var(--s-6); }
   .photo { justify-self: end; width: 100%; }
+  /* height: auto is the whole fix. The width/height attributes above are
+     presentational hints, so height="2000" became a literal 2000px box that
+     aspect-ratio could not override — a 416x2000 slot, which object-fit: cover
+     filled with a vertical sliver of the face. With height auto the ratio sets
+     the height, so the container follows the image instead. object-position
+     sits above centre so that if anything ever does crop, it comes off the
+     bottom rather than the face. */
+  .photo img {
+    width: 100%;
+    max-width: 26rem;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 50% 20%;
+    border-radius: var(--radius-lg);
+  }
   @media (max-width: 48em) { .photo { justify-self: start; } }
   .story p { font-size: var(--text-lg); line-height: 1.6; }
   .story .sign { font-size: var(--text-h3); margin-block-start: var(--s-10); }
