@@ -1,0 +1,116 @@
+---
+/**
+ * VERBATIM legal text, copied from sites/sondor-ai/src/pages/privacy.astro, which
+ * itself mirrors the Notion page "Privacy Policy & Terms of Service" (last updated
+ * September 5, 2026). Do not edit copy here. Edit the Notion page, mirror it into the
+ * sondor.ai page, then copy it across.
+ *
+ * WHY A SECOND COPY RATHER THAN A LINK. beta.sondor.ai collects personal data through
+ * the application form (a name, an email, three free-text answers), so it needs a
+ * privacy policy of its own. It cannot point at sondor.ai's: the spec forbids linking
+ * the beta site to the main site anywhere. So the text lives twice, deliberately, and
+ * the header above says which copy is the source.
+ *
+ * ONE LINE IS MISSING ON PURPOSE: the source ends with "See also the Terms of Service",
+ * linking to /terms. The beta site has no terms page, and the only other place that
+ * link could point is sondor.ai. A link that 404s in a privacy policy is worse than no
+ * link, so it is dropped here rather than rewritten.
+ */
+import Layout from '../layouts/Layout.astro';
+import LegalBanner from '../components/LegalBanner.astro';
+
+const title = 'Sondor beta privacy policy, and where your words actually live';
+const description = 'What Sondor collects, what it does not, and where your content is stored. Your transcripts and pieces stay in your own Notion. Sondor holds account records.';
+---
+<Layout {title} {description}>
+  <section class="section page-head hero-field">
+    <div class="container narrow">
+      <p class="eyebrow">Legal</p>
+      <h1>Privacy Policy</h1>
+      <LegalBanner />
+      <p class="muted">Last updated: September 5, 2026</p>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container narrow prose legal">
+
+      <h2>The short version</h2>
+      <p>Sondor helps you write using your own words. The material you create, your interview transcripts, your stories, your finished pieces, is stored in <strong>your own Notion workspace</strong>, under your own Notion account. We don't hold your content on our servers.</p>
+      <p>We do hold some things: your account details, the secure connection to your Notion, and records needed to run the service. Details below.</p>
+
+      <h2>What we collect</h2>
+      <p><strong>Content you create</strong></p>
+      <ul>
+        <li>Interview transcripts and session material</li>
+        <li>Voice recordings you make in the app</li>
+        <li>Writing samples and documents you upload or paste</li>
+        <li>Content generated from your own words</li>
+      </ul>
+      <p><strong>Account and operational data</strong></p>
+      <ul>
+        <li>Your email address and account credentials</li>
+        <li>Your encrypted Notion connection token</li>
+        <li>Session records (when you logged in, which device)</li>
+        <li>Subscription and payment status</li>
+        <li>Usage records (sessions completed, features used)</li>
+      </ul>
+      <p><strong>What we don't collect</strong></p>
+      <ul>
+        <li>We don't track you across other websites</li>
+        <li>We don't sell your data to anyone</li>
+        <li>We don't use your content to train AI models</li>
+      </ul>
+
+      <h2>Where your data actually lives</h2>
+      <p>This distinction matters, so we're being precise about it:</p>
+      <p><strong>In your own Notion workspace:</strong> all of your content. Interview transcripts, stories, voice profile, finished pieces, everything Sondor helps you produce. You own it, you can read it directly in Notion without us, and you keep it if you leave.</p>
+      <p><strong>On Sondor's servers:</strong> your account record, your encrypted Notion access token, session records, subscription status, and usage data. This is what's needed to log you in, connect you to your own Notion, and bill you correctly.</p>
+
+      <h2>Third parties we use</h2>
+      <p>Your data passes through these services in the course of running Sondor:</p>
+      <ul>
+        <li><strong>Anthropic (Claude)</strong> — processes your session material to conduct interviews and assemble content. Under Anthropic's API terms, material submitted through their API is not used to train their models.</li>
+        <li><strong>Notion</strong> — stores all of your content, in your own workspace, under your own Notion account and their privacy policy.</li>
+        <li><strong>AssemblyAI</strong> — transcribes voice recordings into text.</li>
+        <li><strong>Stripe</strong> — processes payments. We never see or store your full card details.</li>
+        <li><strong>Railway</strong> — hosts our backend servers.</li>
+        <li><strong>Cloudflare</strong> — serves our website.</li>
+      </ul>
+
+      <h2>Voice recordings</h2>
+      <p>When you record audio in Sondor, it's transcribed to text so the app can work with your words. Recordings are processed by AssemblyAI and handled according to your settings in the app.</p>
+
+      <h2>Sensitive material</h2>
+      <p>Sondor's interviews can go into personal territory, formative experiences, loss, belief, unresolved tension. That's the point of the tool.</p>
+      <p>Because of that, Sondor includes a safeguard: if a session surfaces language suggesting serious distress, the app will show you crisis resource information, and will mark that material so it isn't automatically resurfaced to you later in suggestions or prompts. The material stays fully visible in your own archive, nothing is hidden or deleted from you. It simply isn't served back unprompted.</p>
+      <p>This detection is automated and imperfect. It is not monitoring by a human, and it is not a substitute for real support.</p>
+
+      <h2>Your Notion connection</h2>
+      <p>You connect your own Notion account to Sondor by granting access, and you choose what to share. You can revoke that access at any time from Notion's own settings.</p>
+      <p>If you revoke it, Sondor loses access, but <strong>your content stays exactly where it is</strong>, in your Notion, untouched. Nothing gets deleted, because it was never ours to delete.</p>
+
+      <h2>Deleting your account</h2>
+      <p>You can request account deletion at any time by emailing <a href="mailto:hello@sondor.ai">hello@sondor.ai</a>. We'll delete your account record, your stored connection token, and your session data from our servers.</p>
+      <p>Your content in Notion is unaffected, it's yours, and it stays.</p>
+
+      <h2>If Sondor shuts down</h2>
+      <p>Sondor is an early-stage product built by one person. If it ever ceases operation, your content is unaffected: it lives in your Notion workspace and remains fully accessible to you without Sondor existing. We'd give reasonable advance notice and delete account data from our servers.</p>
+
+      <h2>Age requirement</h2>
+      <p>Sondor is for adults, 18 and over. The interviews explore personal history, belief, and formative experience at real depth, and the product isn't designed or appropriate for minors. We don't knowingly collect data from anyone under 18.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>If we change this policy meaningfully, we'll notify you by email before the changes take effect.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about privacy: <a href="mailto:hello@sondor.ai">hello@sondor.ai</a></p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-head { padding-block: var(--s-20) var(--s-10); }
+  .page-head h1 { margin-block-start: var(--s-3); }
+  .legal { padding-block-end: var(--s-16); }
+</style>

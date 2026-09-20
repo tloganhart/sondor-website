@@ -17,6 +17,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <main id="main">
       <slot />
     </main>
-    <Footer note="Closed beta. Sondor is a writing tool that refuses to write for you. It interviews you and builds from your own words." />
+    <Footer
+      note="Closed beta. Sondor is a writing tool that refuses to write for you. It interviews you and builds from your own words."
+      legal={[{ href: '/privacy', label: 'Privacy policy' }]}
+    />
   </body>
 </html>
