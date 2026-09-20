@@ -1,0 +1,245 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Placeholder from '@sondor/design/components/Placeholder.astro';
+import Mark from '@sondor/design/components/Mark.astro';
+import { tiers, trial, tagline } from '@sondor/design/config';
+
+const title = 'Sondor | The writing tool that refuses to write for you';
+const description = 'Sondor interviews you, keeps what you said word for word, and builds finished pieces from your own sentences. For writers done with AI slop. Free 14 days.';
+---
+<Layout {title} {description}>
+
+  <!-- Hero. Four questions in one screen: what, who, why trust, what next. -->
+  <section class="hero hero-field">
+    <Mark class="watermark" />
+    <div class="container">
+      <p class="serif-italic tagline">{tagline}</p>
+      <h1>A writing tool that refuses to write for you. It interviews you and builds from your own words.</h1>
+      <span class="ink" aria-hidden="true"></span>
+      <p class="lede">Every sentence in the finished piece is one you actually said. Built for writers who are done with AI slop.</p>
+      <div class="hero-cta">
+        <Cta large />
+      </div>
+    </div>
+  </section>
+
+  <!-- The enemy, named, then what Sondor stands for. -->
+  <section class="section section--rule">
+    <div class="container grid grid-split">
+      <SectionHead title="You can hear the slop now. So can your readers." />
+      <div class="prose">
+        <p>Somewhere in the last two years, generated writing became easy to spot. The phrasing runs a little too smooth. The structure arrives a little too tidy. Readers notice, and once they notice, they stop trusting the byline. Writers notice too, and many have quietly stopped publishing rather than add to the pile.</p>
+        <p>The tools that caused this all work the same way. You give them a prompt and they hand you text you never said. That is the category Sondor was built to refuse.</p>
+        <p>Sondor starts from the other end. It asks you questions, the way a good interviewer or a patient friend would, and it treats your answers as the only material worth using. What comes out is your thinking, in your phrasing, arranged so it reads well. Sharper than you would have managed at midnight with a blank page. Still unmistakably yours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works, as a method narrative. The value is a process, so this section is long on purpose. -->
+  <section class="section section--rule" id="how">
+    <div class="container">
+      <SectionHead eyebrow="How it works" title="It starts with a question and keeps asking" lede="A session has three parts. You do the talking in the first one." />
+
+      <div class="grid grid-3 steps">
+        <div class="step raised raised--lift">
+          <p class="step-n serif">1</p>
+          <h3>Sondor asks</h3>
+          <p>You pick a topic, or let Sondor pick one from the map of what you have already said you care about. Then it interviews you. Follow-up questions, pushback where your answer was vague, a request for the story behind a claim. You talk or type. Most people talk.</p>
+        </div>
+        <div class="step raised raised--lift">
+          <p class="step-n serif">2</p>
+          <h3>Your words are kept</h3>
+          <p>The transcript is the raw material and it stays yours, word for word, in your own Notion workspace. Sondor also learns from it: your phrasing, your recurring ideas, the way you open and close a thought. That profile gets sharper with every session.</p>
+        </div>
+        <div class="step raised raised--lift">
+          <p class="step-n serif">3</p>
+          <h3>A piece is assembled</h3>
+          <p>Sondor arranges what you said into a finished piece. Nothing in it is generated. If two of your thoughts need a connecting phrase you never said, that phrase is marked as an addition and you are asked before it stays. Publish it, or run the same words through a different format later.</p>
+        </div>
+      </div>
+
+      <div class="transcript-wrap raised">
+        <p class="eyebrow">What an exchange looks like</p>
+        <div class="transcript" aria-label="Sample exchange from a session">
+          <div class="turn">
+            <p class="who">Sondor</p>
+            <p class="what">You said you stopped posting as much. What changed?</p>
+          </div>
+          <div class="turn turn--you turn--kept">
+            <p class="who">You</p>
+            <p class="what">I knew I wanted to write longer-form content. I knew it was a way to express more complex and deep ideas in a format my normal punchy one-liners just couldn't tap into, but I struggled to find the time to carve out a real sit-down-and-write session.</p>
+          </div>
+          <div class="turn">
+            <p class="who">Sondor</p>
+            <p class="what">So the ideas were there and the sitting down was the problem. What did the ideas look like before they got written?</p>
+          </div>
+        </div>
+        <p class="small muted caption">The answer is the founder's, word for word, from the session that produced the story on the <a class="link" href="/about">About page</a>. The questions are the kind Sondor asks. The marked answer is what gets kept.</p>
+      </div>
+
+      <div class="media">
+        <Placeholder label="Screen-share clip of a live session, from first question to finished piece" size="1600 × 900 px, 16:9, MP4 under 8 MB or a poster image" ratio="16 / 9" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Outcomes, and the refusals. Features described as what you end up with. -->
+  <section class="section section--rule">
+    <div class="container grid grid-2">
+      <div class="raised">
+        <SectionHead title="What you end up with" />
+        <div class="rows">
+          <div class="row"><p class="row-label">Finished pieces</p><p>Posts, essays, scripts, threads. Assembled from your transcript, in your order or a better one, ready to publish or to edit further.</p></div>
+          <div class="row"><p class="row-label">A voice profile</p><p>A record of how you actually write and talk, built from what you said rather than from a questionnaire. It informs every later session.</p></div>
+          <div class="row"><p class="row-label">A topical map</p><p>The territory of what you think about, drawn from your own sessions. It shows you where you have depth and where you keep circling.</p></div>
+          <div class="row"><p class="row-label">A provenance mark</p><p>A finished piece can carry a link anyone can open to see that the words came from you, with any added connective phrase named plainly.</p></div>
+          <div class="row"><p class="row-label">Your own Notion</p><p>Everything lives in your workspace, under your account. Cancel and it all stays exactly where it is.</p></div>
+        </div>
+      </div>
+      <div class="raised">
+        <SectionHead title="What Sondor will not do" />
+        <div class="rows">
+          <div class="row"><p class="row-label">Write from a prompt</p><p>There is no box where you type a topic and receive a draft. If you did not say it, it does not go in unmarked.</p></div>
+          <div class="row"><p class="row-label">Invent an opinion</p><p>When your answer left a gap, Sondor asks you another question. It never fills the gap with a position you did not take.</p></div>
+          <div class="row"><p class="row-label">Hide its additions</p><p>The few places where it may add a word or two, a seam between two thoughts for instance, are marked, and you approve each one.</p></div>
+          <div class="row"><p class="row-label">Train on your work</p><p>Your transcripts and pieces are not used to train models. They are yours, and they stay in your Notion.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it is for, and who it is not for. -->
+  <section class="section section--rule band">
+    <div class="container grid grid-split">
+      <SectionHead title="Who this is for" />
+      <div class="prose">
+        <p>Writers and creators who publish under their own name and want it to stay recognisably theirs. People who have more ideas than sitting-down time. People who explain something perfectly out loud and then lose it at the keyboard. Anyone who has caught themselves about to paste a prompt into a chatbot and felt a little sick about it.</p>
+        <p>It is a poor fit if you want thirty posts from one sentence. Sondor will ask you thirty questions instead, and the piece at the end will take you longer than a paste. That is the trade, and it is the whole point.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing summary. Full detail and trial terms on /pricing. -->
+  <section class="section section--rule" id="pricing">
+    <div class="container">
+      <SectionHead eyebrow="Pricing" title="Two plans, one method" lede={`Both start with a ${trial.days}-day free trial that includes the ${tiers.premium.name} tools. No card to start.`} />
+      <div class="grid grid-2 plans">
+        <div class="plan raised raised--lift">
+          <h3>{tiers.basic.name}</h3>
+          <p class="price"><span class="amount">${tiers.basic.price}</span><span class="per">/month</span></p>
+          <p>{tiers.basic.summary} Interviews, voice profile, topical map, assembly, repurposing, provenance mark.</p>
+        </div>
+        <div class="plan raised raised--lift">
+          <h3>{tiers.premium.name}</h3>
+          <p class="price"><span class="amount">${tiers.premium.price}</span><span class="per">/month</span></p>
+          <p>{tiers.premium.summary} Everything in {tiers.basic.name}, plus more than one brand or voice, transcription of your existing recordings, image generation, and Guest Rundown for interviewing someone else.</p>
+        </div>
+      </div>
+      <p class="plans-link"><a class="link" href="/pricing">Full pricing and trial terms</a></p>
+    </div>
+  </section>
+
+  <!-- Objections, answered directly. Six at most. -->
+  <section class="section section--rule band">
+    <div class="container grid grid-split">
+      <SectionHead title="Fair questions" />
+      <div class="faq raised raised--tight">
+        <details>
+          <summary>Why pay for this when ChatGPT is free?</summary>
+          <div>
+            <p>Because they do different jobs. A chatbot writes text for you, and readers can increasingly tell. Sondor gets text out of you, keeps it intact, and organises it. If you want something written on your behalf, a chatbot is cheaper and faster. If you want to publish more of your own thinking without spending your evenings typing it, that is what this is for.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Is it really my writing, or is AI doing it underneath?</summary>
+          <div>
+            <p>AI runs the interview and does the arranging. It does not write the sentences. The finished piece is made of your transcript, and the handful of places where a connecting phrase had to be added are marked and shown to you before they stay. You can open the provenance link on any piece and see exactly which words are yours. It is all of them, plus whatever you approved.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Where does my content live? Who can see it?</summary>
+          <div>
+            <p>In your own Notion workspace, under your own Notion account. Sondor holds your login, an encrypted connection to your Notion, and billing records. It does not hold your transcripts or your pieces, and it does not use them to train anything. If you cancel, or if Sondor disappeared tomorrow, your content would still be sitting in your Notion. The <a href="/privacy">privacy policy</a> spells this out.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Why is there no free tier?</summary>
+          <div>
+            <p>The value shows up after a few real sessions, and each session costs real money to run. A {trial.days}-day trial with the full {tiers.premium.name} tools lets you find out whether it works for you without a card on file. A permanent free plan would mean building a worse product for the people who pay.</p>
+          </div>
+        </details>
+        <details>
+          <summary>What happens when the trial ends?</summary>
+          <div>
+            <p>The app locks to an upgrade screen until you subscribe. Nothing is deleted and nothing is taken from you. Every transcript, profile and piece from the trial is in your Notion and stays there whether or not you continue. Full details are in the <a href="/pricing#trial">trial terms</a>.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Do I have to be good at talking?</summary>
+          <div>
+            <p>No. You have to be willing to answer questions. Rambling answers work well, because Sondor asks follow-ups and pulls the sharp parts out of the ramble. Typed answers work too. The only thing that does not work is having nothing to say about the topic, and Sondor will tell you when that is what is happening rather than fill it in.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder note, short. Full story on About. -->
+  <section class="section section--rule">
+    <div class="container narrow">
+      <p class="eyebrow">From the founder</p>
+      <blockquote class="founder-note">
+        <p class="serif">"So no matter how strong that pull to lean on these tools felt, it never quite felt right. I felt like a hypocrite, participating in something I so palpably loathed to see from others."</p>
+        <p class="serif">"So that's where the initial idea was born: how can I use AI to help me write more efficiently, without telling it to write for me?"</p>
+        <footer>
+          <p>Logan Hart, founder. <a class="link" href="/about">The whole story, and why the Socratic method turned out to be the answer</a>.</p>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Closing CTA. Same action as the top. -->
+  <section class="section closing hero-field">
+    <div class="container">
+      <h2>Your next piece starts with a question.</h2>
+      <Cta large center />
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .hero { padding-block: clamp(var(--s-16), 12vw, var(--s-32)) var(--s-20); }
+  .hero h1 { max-width: 20ch; }
+  .tagline { color: var(--text-muted); font-size: var(--text-lg); margin-block-end: var(--s-6); }
+  .hero .lede { max-width: var(--measure); margin-block-end: var(--s-10); }
+  .hero .ink { margin-block: var(--s-8) var(--s-8); }
+
+  .steps { margin-block-end: var(--s-12); gap: var(--s-6); }
+  .step { display: grid; gap: var(--s-3); align-content: start; }
+  .step-n { font-size: var(--text-h2); line-height: 1; color: var(--text-muted); }
+  .step h3 { font-size: var(--text-h4); font-family: var(--font-body); font-weight: 600; letter-spacing: 0; }
+
+  .transcript-wrap { display: grid; gap: var(--s-6); margin-block-end: var(--s-12); max-width: 60rem; }
+  .transcript-wrap .transcript { max-width: none; }
+  .caption { max-width: var(--measure-wide); }
+  .media { max-width: 60rem; }
+
+  .plans { max-width: 60rem; gap: var(--s-6); }
+  .plan { display: grid; gap: var(--s-3); align-content: start; }
+  .plan h3 { font-family: var(--font-body); font-weight: 600; font-size: var(--text-h4); letter-spacing: 0; }
+  .price { display: flex; align-items: baseline; gap: var(--s-1); font-family: var(--font-display); }
+  .amount { font-size: var(--text-h2); line-height: 1; }
+  .per { color: var(--text-muted); font-family: var(--font-body); }
+  .plans-link { margin-block-start: var(--s-10); }
+
+  .founder-note { display: grid; gap: var(--s-6); }
+  .founder-note .serif { font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.75rem); line-height: 1.4; max-width: var(--measure-wide); }
+  .founder-note footer p { color: var(--text-muted); }
+
+  .closing { text-align: center; padding-block: var(--s-32) var(--s-24); border-top: 1px solid var(--rule-teal); border-bottom: 0; }
+  .closing h2 { margin-inline: auto; margin-block-end: var(--s-10); max-width: 22ch; }
+  .closing :global(.cta) { margin-inline: auto; }
+</style>

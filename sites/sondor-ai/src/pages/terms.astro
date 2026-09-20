@@ -1,0 +1,100 @@
+---
+/**
+ * VERBATIM legal text from the Notion page "Privacy Policy & Terms of Service" (last updated September 5, 2026).
+ * Do not edit copy here. Edit the Notion page, then mirror the change.
+ */
+import Layout from '../layouts/Layout.astro';
+import LegalBanner from '../components/LegalBanner.astro';
+
+const title = 'Sondor terms of service, plain language, no small print';
+const description = 'The terms for using Sondor: what it is and is not, who owns your content, acceptable use, billing, the free trial, the weekly allowance, and beta terms.';
+---
+<Layout {title} {description}>
+  <section class="section page-head hero-field">
+    <div class="container narrow">
+      <p class="eyebrow">Legal</p>
+      <h1>Terms of Service</h1>
+      <LegalBanner />
+      <p class="muted">Last updated: September 5, 2026</p>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container narrow prose legal">
+
+      <h2>What Sondor is</h2>
+      <p>Sondor is a writing tool. It interviews you, then helps assemble content from what you actually said. Its core constraint is that it works from your own words rather than generating prose on your behalf.</p>
+
+      <h2>What Sondor is not</h2>
+      <p><strong>Sondor is not therapy, counseling, or a mental health service.</strong> It is not operated by clinicians and provides no medical or psychological care. Its interviews can reach personal and emotionally significant material, that's intentional, but it is a writing tool, not treatment.</p>
+      <p>If you're struggling, please reach out to a mental health professional or a crisis line. In the US, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline), available 24/7.</p>
+
+      <h2>Your account</h2>
+      <p>You need to be 18 or older. You're responsible for keeping your login credentials secure and for activity under your account.</p>
+
+      <h2>Your content is yours</h2>
+      <p>You own everything you create in Sondor. We claim no ownership of your interview material, your stories, or the content Sondor helps you assemble.</p>
+      <p>We don't use your content to train AI models.</p>
+
+      <h2>Acceptable use</h2>
+      <p>Don't use Sondor to:</p>
+      <ul>
+        <li>Impersonate another person's voice or writing style with intent to deceive</li>
+        <li>Generate content you'll present as someone else's authentic words</li>
+        <li>Violate any law</li>
+        <li>Attempt to access other users' accounts or data</li>
+        <li>Reverse-engineer, resell, or redistribute the service</li>
+      </ul>
+
+      <h2>Subscriptions and billing</h2>
+      <p><strong>Standard pricing:</strong> $39/month base tier, $59/month premium tier.</p>
+      <p><strong>Founding member pricing:</strong> $29/month base tier, $39/month premium tier, available only to members of our beta cohort, permanently discontinued for new signups at public launch.</p>
+      <p><strong>Tier difference:</strong> the premium tier adds multi-brand support (managing more than one distinct brand or voice from a single account) plus transcription, image generation, and Guest Rundown. Premium features draw from a larger monthly usage allowance than the base tier.</p>
+      <p><strong>Founding member terms:</strong> the discounted rate lasts as long as your subscription stays continuously active. If you voluntarily cancel, the founding rate is permanently forfeited, re-subscribing later returns you to standard pricing. This is stated plainly upfront because founding pricing is about ongoing support, not a one-time claim.</p>
+      <p><strong>Failed payments</strong> get a 3-day grace period to update your payment method before access is affected. A failed payment is not treated as a cancellation.</p>
+      <p><strong>Trial:</strong> new subscribers get a 2-week free trial. No credit card is required to start it. When the trial ends, the app locks to an upgrade screen until you subscribe. Everything you created during the trial stays in your own Notion workspace either way.</p>
+      <p><strong>Cancellation:</strong> cancel anytime. You keep access through the end of your paid period. Your content stays in your Notion regardless.</p>
+      <p><strong>Refunds:</strong> we don't offer prorated refunds for partial months, and we don't offer a money-back guarantee. The 2-week free trial exists so you can decide before you pay. If something is genuinely wrong, email us and we'll sort it out.</p>
+      <p><strong>Price changes:</strong> if we change standard pricing, existing subscribers keep their current rate for at least 30 days after we notify them by email.</p>
+
+      <h2>Depth allowance</h2>
+      <p>Some features use additional AI processing beyond normal use. These draw from a weekly allowance that resets each week and doesn't roll over. Basic conversational use is unmetered and always available.</p>
+      <p>If you use up your weekly allowance, those enhanced features pause until the next reset. Everything else keeps working.</p>
+
+      <h2>Beta terms</h2>
+      <p>If you're using Sondor during beta:</p>
+      <ul>
+        <li>The product is incomplete and will have bugs</li>
+        <li>Features may change or be removed</li>
+        <li>We may need to reset or migrate data (we'll warn you first)</li>
+        <li>Service may be interrupted without notice</li>
+        <li>No warranty of any kind applies</li>
+      </ul>
+
+      <h2>Service availability</h2>
+      <p>We aim for reliable service but don't guarantee uptime. Sondor depends on third-party services (Notion, Anthropic, Stripe) and can be affected by their outages.</p>
+
+      <h2>Limitation of liability</h2>
+      <p>Sondor is provided "as is." To the fullest extent permitted by law, we're not liable for indirect, incidental, or consequential damages. Our total liability is limited to what you've paid us in the past 12 months.</p>
+
+      <h2>Ending your account</h2>
+      <p>You can stop using Sondor anytime. We may suspend or terminate accounts that violate these terms.</p>
+      <p>If we terminate your account, your content remains in your own Notion workspace.</p>
+
+      <h2>Changes to these terms</h2>
+      <p>We'll notify you by email before meaningful changes take effect. Continuing to use Sondor after that means you accept the updated terms.</p>
+
+      <h2>Contact</h2>
+      <p><a href="mailto:hello@sondor.ai">hello@sondor.ai</a></p>
+
+      <p class="muted cross">See also the <a href="/privacy">Privacy Policy</a>.</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-head { padding-block: var(--s-20) var(--s-10); }
+  .page-head h1 { margin-block-start: var(--s-3); }
+  .legal { padding-block-end: var(--s-16); }
+  .cross { margin-block-start: var(--s-12); }
+</style>

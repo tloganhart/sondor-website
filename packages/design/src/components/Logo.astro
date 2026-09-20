@@ -1,0 +1,14 @@
+---
+/** Horizontal lockup, Fog Bone (sondor final-02.svg), inlined so it needs no request. */
+import svg from '../../assets/sondor-horizontal-fog.svg?raw';
+interface Props { height?: string; class?: string }
+const { height = '28px', class: cls = '' } = Astro.props;
+const inline = svg
+  .replace(/<\?xml[^>]*>/, '')
+  .replace('<svg ', `<svg role="img" aria-label="Sondor" focusable="false" style="height:${height};width:auto" `)
+  .replace(/id="Layer_1" data-name="Layer 1" /, '');
+---
+<span class={`logo ${cls}`} set:html={inline} />
+<style>
+  .logo { display: inline-flex; align-items: center; line-height: 0; }
+</style>

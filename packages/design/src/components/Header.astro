@@ -1,0 +1,98 @@
+---
+/**
+ * Site header. Consistent on every page of a site. Main nav carries high-value pages only.
+ * Mobile menu is a <details> element: keyboard operable, no JavaScript.
+ */
+import Logo from './Logo.astro';
+
+interface NavLink { href: string; label: string }
+interface Props {
+  links: NavLink[];
+  cta?: { href: string; label: string };
+  current?: string;
+  homeHref?: string;
+}
+const { links, cta, current, homeHref = '/' } = Astro.props;
+---
+<header class="site-header">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="container bar">
+    <a href={homeHref} class="home" aria-label="Sondor home">
+      <Logo height="26px" />
+    </a>
+
+    {links.length > 0 && (
+      <nav class="nav-desktop" aria-label="Primary">
+        <ul>
+          {links.map((l) => (
+            <li><a href={l.href} aria-current={current === l.href ? 'page' : undefined}>{l.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    )}
+
+    <div class="actions">
+      {cta && <a class="btn btn-secondary cta-btn" href={cta.href}>{cta.label}</a>}
+      {links.length > 0 && (
+        <details class="menu">
+          <summary aria-label="Menu"><span class="bars" aria-hidden="true"><i></i><i></i></span></summary>
+          <nav aria-label="Primary, mobile">
+            <ul>
+              {links.map((l) => (
+                <li><a href={l.href} aria-current={current === l.href ? 'page' : undefined}>{l.label}</a></li>
+              ))}
+              {cta && <li class="menu-cta"><a class="btn btn-primary" href={cta.href}>{cta.label}</a></li>}
+            </ul>
+          </nav>
+        </details>
+      )}
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--petrol) 88%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s-6); min-height: 4.25rem; }
+  .home { display: inline-flex; align-items: center; min-height: 44px; padding-block: var(--s-2); }
+  .nav-desktop ul, .menu ul { list-style: none; padding: 0; margin: 0; display: flex; gap: var(--s-2); }
+  .nav-desktop a, .menu nav a:not(.btn) {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--s-3);
+    text-decoration: none; color: var(--text-muted); font-weight: 500; border-radius: var(--radius);
+    transition: color var(--dur) var(--ease);
+  }
+  .nav-desktop a:hover, .menu nav a:not(.btn):hover, .nav-desktop a[aria-current="page"], .menu nav a[aria-current="page"] { color: var(--text); }
+  .nav-desktop a[aria-current="page"] { text-decoration: underline; text-underline-offset: 0.35em; text-decoration-color: var(--rule-strong); }
+  .actions { display: flex; align-items: center; gap: var(--s-3); }
+  .cta-btn { padding-block: 0.6rem; }
+
+  .menu { position: relative; display: none; }
+  .menu summary { list-style: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--radius); cursor: pointer; }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu summary:hover { background: color-mix(in srgb, var(--steel) 18%, transparent); }
+  .bars { display: grid; gap: 6px; width: 20px; }
+  .bars i { display: block; height: 1.5px; background: var(--text); transition: transform var(--dur) var(--ease); }
+  .menu[open] .bars i:first-child { transform: translateY(3.75px) rotate(45deg); }
+  .menu[open] .bars i:last-child { transform: translateY(-3.75px) rotate(-45deg); }
+  .menu nav {
+    position: absolute; right: 0; top: calc(100% + var(--s-2));
+    min-width: 14rem; padding: var(--s-3);
+    background: var(--petrol-2); border: 1px solid var(--rule); border-radius: var(--radius-lg);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+  }
+  .menu ul { flex-direction: column; gap: 0; }
+  .menu nav a:not(.btn) { width: 100%; padding: var(--s-3); }
+  .menu-cta { margin-block-start: var(--s-3); padding-block-start: var(--s-3); border-top: 1px solid var(--rule); }
+  .menu-cta .btn { width: 100%; }
+
+  @media (max-width: 52em) {
+    .nav-desktop { display: none; }
+    .menu { display: block; }
+    .cta-btn { display: none; }
+  }
+</style>

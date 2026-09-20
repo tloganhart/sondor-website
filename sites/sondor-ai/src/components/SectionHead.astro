@@ -1,0 +1,16 @@
+---
+interface Props { eyebrow?: string; title: string; lede?: string; id?: string }
+const { eyebrow, title, lede, id } = Astro.props;
+---
+<div class="section-head stack" {id}>
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <h2>{title}</h2>
+  {lede && <p class="lede">{lede}</p>}
+</div>
+<style>
+  .section-head { margin-block-end: var(--s-12); }
+  .section-head h2 { max-width: 24ch; }
+  .section-head .eyebrow + h2 { margin-block-start: var(--s-3); }
+  .section-head .lede { margin-block-start: var(--s-5); max-width: var(--measure-wide); }
+  @media (max-width: 48em) { .section-head { margin-block-end: var(--s-8); } }
+</style>

@@ -1,0 +1,22 @@
+---
+import Head from '@sondor/design/components/Head.astro';
+import Header from '@sondor/design/components/Header.astro';
+import Footer from '@sondor/design/components/Footer.astro';
+
+interface Props { title: string; description: string; noindex?: boolean }
+const { title, description, noindex } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head {title} {description} {canonical} {noindex} analyticsToken={import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN} />
+  </head>
+  <body>
+    <Header links={[]} cta={{ href: '#apply', label: 'Apply' }} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer note="Closed beta. Sondor is a writing tool that refuses to write for you. It interviews you and builds from your own words." />
+  </body>
+</html>

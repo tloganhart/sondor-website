@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+const title = 'Page not found on sondor.ai, here is where the pages are';
+const description = 'That page does not exist on sondor.ai. Go back to the home page, read how Sondor works, check pricing and trial terms, or read the founder story on About.';
+---
+<Layout {title} {description} noindex>
+  <section class="section hero-field">
+    <div class="container narrow stack">
+      <p class="eyebrow">404</p>
+      <h1>That page isn't here.</h1>
+      <p class="lede">The address may be wrong, or the page may have moved. These are the ones that exist.</p>
+      <ul class="links">
+        <li><a class="link" href="/">Home</a></li>
+        <li><a class="link" href="/how-it-works">How it works</a></li>
+        <li><a class="link" href="/pricing">Pricing and trial terms</a></li>
+        <li><a class="link" href="/about">About</a></li>
+      </ul>
+    </div>
+  </section>
+</Layout>
+<style>
+  .section { padding-block: var(--s-32) var(--s-24); }
+  .links { list-style: none; padding: 0; display: grid; gap: var(--s-2); margin-block-start: var(--s-8); }
+  .links a { display: inline-flex; min-height: 44px; align-items: center; }
+</style>

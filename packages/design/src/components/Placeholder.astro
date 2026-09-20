@@ -1,0 +1,26 @@
+---
+/**
+ * Marked placeholder for media that does not exist yet (screenshots, screen-share clips,
+ * the founder photograph). Sized by aspect ratio so the real asset drops in without a
+ * layout change. Replace the whole component with <img> or <video> at the same width.
+ */
+interface Props {
+  /** What goes here, in plain words. Shown inside the box. */
+  label: string;
+  /** Recommended export size, e.g. "1600 × 1000 px". Shown inside the box. */
+  size: string;
+  /** CSS aspect-ratio value, e.g. "16 / 10". */
+  ratio: string;
+  /** Optional max width, e.g. "28rem". */
+  maxWidth?: string;
+  class?: string;
+}
+const { label, size, ratio, maxWidth, class: cls = '' } = Astro.props;
+---
+<div class={`placeholder ${cls}`} style={`aspect-ratio: ${ratio};${maxWidth ? ` max-width: ${maxWidth};` : ''}`} role="img" aria-label={`Placeholder for ${label}`}>
+  <div class="placeholder-label">
+    <strong>Placeholder</strong>
+    {label}<br />
+    <span>{size}</span>
+  </div>
+</div>

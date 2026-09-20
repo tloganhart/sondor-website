@@ -1,0 +1,60 @@
+---
+/**
+ * Per-page document head. Title and description come from page frontmatter.
+ * Targets (Crawford): title 55 to 60 characters, description 150 to 160.
+ * scripts/check-seo.mjs enforces both on the built HTML.
+ */
+import '../styles/base.css';
+import Tracking from './Tracking.astro';
+import newsreader from '../fonts/newsreader-400.woff2?url';
+import hanken from '../fonts/hanken-grotesk-var-normal.woff2?url';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Absolute canonical URL for this page. */
+  canonical: string;
+  /** Absolute URL to the social image. Defaults to /og.png on the current site. */
+  image?: string;
+  noindex?: boolean;
+  /** Cloudflare Web Analytics token for this site, or undefined to render no beacon. */
+  analyticsToken?: string;
+}
+const { title, description, canonical, image, noindex = false, analyticsToken } = Astro.props;
+// PUBLIC_NOINDEX=1 keeps a pre-launch deployment out of search results without touching page code.
+const robotsNoindex = noindex || import.meta.env.PUBLIC_NOINDEX === '1';
+const origin = new URL(canonical).origin;
+const ogImage = image ?? `${origin}/og.png`;
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{robotsNoindex && <meta name="robots" content="noindex" />}
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#050d14" />
+
+<link rel="preload" href={newsreader} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={hanken} as="font" type="font/woff2" crossorigin />
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/icon-32.png" sizes="32x32" type="image/png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Sondor" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<Tracking analyticsToken={analyticsToken} />

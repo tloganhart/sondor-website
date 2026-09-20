@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+import Placeholder from '@sondor/design/components/Placeholder.astro';
+
+const title = 'About Sondor and the writer who built it out of necessity';
+const description = 'Built by one content creator who wanted the efficiency of AI without handing over his voice. The founder story in his own words, and why Socrates was the fix.';
+---
+<Layout {title} {description}>
+
+  <section class="section page-head hero-field">
+    <div class="container grid grid-split">
+      <div>
+        <p class="eyebrow">About</p>
+        <h1>Built by one writer, for the problem he could not stop noticing</h1>
+        <p class="lede">Sondor is made by Logan Hart, a content creator who runs several brands and got tired of choosing between falling behind and adding to the slop. What follows is his account of how it came about, in his own words. It was extracted the way every Sondor piece is: in a session, from a transcript, with the phrasing kept and nothing added.</p>
+      </div>
+      <div class="photo">
+        <Placeholder label="Photograph of Logan Hart, the founder. The one photograph on the site." size="1200 × 1500 px, 4:5 portrait, JPEG or WebP" ratio="4 / 5" maxWidth="26rem" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--rule">
+    <div class="container narrow">
+      <article class="prose story">
+        <p>Sondor was created out of a personal need of my own. I've been a content creator for quite some time now, with multiple brands and platforms all vying for my attention and participation. That's a lot for any one human to manage.</p>
+        <p>Since the release and increasingly easy access of AI, I've been feeling that pressure to utilize such tools, because there's no denying the asymmetrical boon to productivity and consistency it offers. However, that pressure and draw has been heavily fraught and counterbalanced by a very strong and utter disgust at the torrential onslaught of AI slop, seemingly spreading like the Borg from Star Trek, infecting even very talented writers I've been following for a while.</p>
+        <p>That became a huge point of contention for me. It's something I've felt very frustrated by, yet helpless to do anything about, other than the simple choice not to participate or contribute to the grand symphony of slop. So no matter how strong that pull to lean on these tools felt, it never quite felt right. I felt like a hypocrite, participating in something I so palpably loathed to see from others.</p>
+        <p>I don't think it was a specific moment, and that's the point. It was an accumulation. It became so overwhelming that I found myself not even wanting to be on social media much, because I was constantly rolling my eyes at yet another AI slop post. Or I'd be ten minutes into a YouTube video and my ears would suddenly notice something about the phrasing, the structure of the script, and I'd realize it was just ChatGPT-generated, at which point I'd almost completely lose interest and often turn the video off. That's even part of why I stopped posting as much, because I knew I wanted to write longer-form content. I knew it was a way to express more complex and deep ideas in a format my normal punchy one-liners just couldn't tap into, but I struggled to find the time to carve out a real sit-down-and-write session.</p>
+        <p>So that's where the initial idea was born: how can I use AI to help me write more efficiently, without telling it to write for me?</p>
+        <p>I've always been fascinated and impressed by the Socratic Method. So that's where my instinct led me first. I love how using questions rather than statements naturally cuts through and takes a direct pathway to truth, and by its nature, it's all about using the answers verbatim, to pressure-test them against themselves later, to identify contradictory beliefs. So without any forceful shoehorning, it was already the perfect format for what I had in mind. That's how the first prototype of what would eventually become Sondor was born, unbeknownst to me: a single training doc called the Socratic Extraction Method, an instruction file for AI to follow to conduct these interviews.</p>
+        <p>I tested it on myself, and the results surpassed even my optimistic expectations. It worked shockingly well. The real turning point came when I started experimenting with a visualized artifact in Claude of my topical map. Once I had those two pieces, the topical map and the extraction method doc, I had an unshakable knowing that this was materializing into something greater. Without hesitation, I listened, I embraced it, and I've been building obsessively ever since.</p>
+        <p>That's how Sondor was born: out of a necessity to solve a problem for myself, one so useful I almost felt obligated to make it available to other people. I wanted to offer people a tool that gave them a different way of writing, one that leveraged the efficiency and productivity offered by AI without outsourcing their voice or creativity. That's exactly what Sondor is. I know many others feel the same way I do about AI slop.</p>
+        <p class="sign serif">Logan</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section--rule band">
+    <div class="container narrow">
+      <blockquote class="pull raised">
+        <p class="serif">"Leveraging AI to improve the quality of your writing, your efficiency, even your own thinking, without outsourcing the one thing that matters most: your own voice."</p>
+        <footer><p class="muted">The line Logan uses when someone asks what Sondor is for.</p></footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section section--rule">
+    <div class="container narrow prose">
+      <h2>How Sondor is run</h2>
+      <p>Sondor is a small, independent product built by one person. What gets built is whatever makes the interview better and the output more honestly yours. Your content lives in your own Notion workspace rather than on Sondor's servers, which is a technical choice and also a statement about who it belongs to. If you have a question that the site does not answer, <a href="mailto:hello@sondor.ai">hello@sondor.ai</a> reaches Logan directly.</p>
+    </div>
+  </section>
+
+  <section class="section closing hero-field">
+    <div class="container">
+      <h2>Find out what you have been meaning to say.</h2>
+      <Cta large center />
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .page-head { padding-block: var(--s-20) var(--s-12); }
+  .page-head h1 { margin-block-start: var(--s-3); font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.75rem); }
+  .page-head .lede { margin-block-start: var(--s-6); }
+  .photo { justify-self: end; width: 100%; }
+  @media (max-width: 48em) { .photo { justify-self: start; } }
+  .story p { font-size: var(--text-lg); line-height: 1.6; }
+  .story .sign { font-size: var(--text-h3); margin-block-start: var(--s-10); }
+  .pull { display: grid; gap: var(--s-4); }
+  .pull .serif { font-size: clamp(1.375rem, 1.15rem + 1vw, 2rem); line-height: 1.35; max-width: var(--measure-wide); }
+  .closing { text-align: center; padding-block: var(--s-32) var(--s-24); border-top: 1px solid var(--rule-teal); border-bottom: 0; }
+  .closing h2 { margin-inline: auto; margin-block-end: var(--s-10); max-width: 24ch; }
+  .closing :global(.cta) { margin-inline: auto; }
+</style>

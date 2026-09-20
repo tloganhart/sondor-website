@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ApplyForm from '../components/ApplyForm.astro';
+import Placeholder from '@sondor/design/components/Placeholder.astro';
+import Mark from '@sondor/design/components/Mark.astro';
+import { beta, tiers, tagline } from '@sondor/design/config';
+
+const title = 'Apply for the Sondor closed beta, 100 spots, four weeks';
+const description = 'Sondor is a writing tool that refuses to write for you. It interviews you and builds pieces from your own words. 100 people get four weeks before launch.';
+---
+<Layout {title} {description}>
+
+  <section class="hero hero-field">
+    <Mark class="watermark" />
+    <div class="container">
+      <p class="eyebrow">Closed beta</p>
+      <h1>Help test a writing tool that refuses to write for you.</h1>
+      <span class="ink" aria-hidden="true"></span>
+      <p class="lede">Sondor interviews you and builds finished pieces from your own words. Before it opens to the public, {beta.cap} people get {beta.weeksWord} weeks with it, a direct line to the person who built it, and a founding rate that holds. The application is at the bottom of this page.</p>
+      <div class="cta">
+        <a class="btn btn-primary btn-lg" href="#apply">Apply for the beta</a>
+        <p class="note">Six questions. About five minutes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--rule">
+    <div class="container grid grid-split">
+      <div class="section-head">
+        <h2>What Sondor is</h2>
+      </div>
+      <div class="prose">
+        <p>Most AI writing tools work the same way: you type a prompt, they hand you text you never said. Sondor is built to refuse that. It asks you questions instead, follows up on your answers, and keeps everything you say, word for word, in your own Notion workspace. When there is enough material, it assembles a piece out of your transcript. Nothing in it is generated. The rare connecting phrase it needs to add is marked and shown to you before it stays.</p>
+        <p>The result is your thinking in your phrasing, arranged so it reads well. It is slower than pasting a prompt. That is the point.</p>
+        <p class="serif-italic tag">{tagline}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--rule">
+    <div class="container grid grid-split">
+      <div class="section-head">
+        <h2>What the beta asks of you</h2>
+      </div>
+      <div class="rows raised raised--tight">
+        <div class="row"><p class="row-label">About {beta.weeksWord} weeks</p><p>Long enough to run real sessions and publish from them. Short enough that the ask is honest.</p></div>
+        <div class="row"><p class="row-label">Actually use it</p><p>The most useful thing a tester can do is run sessions on the things you would write about anyway. Real use produces real feedback. Poking at it once and drifting off produces nothing for either of us.</p></div>
+        <div class="row"><p class="row-label">A weekly call</p><p>One group call a week on Discord, where what broke and what worked gets talked through. Orientation, the first call, is required. It is where you learn the method and where the ground rules get set.</p></div>
+        <div class="row"><p class="row-label">Tell me what's wrong</p><p>Bugs, confusing screens, questions the interview should have asked and did not. Bluntness is welcome. The point of this stage is finding the problems while the group is small enough to fix them for.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--rule band">
+    <div class="container grid grid-split">
+      <div class="section-head">
+        <h2>Why only {beta.cap}</h2>
+      </div>
+      <div class="prose">
+        <p>Because one person is running this. Every tester gets onboarded properly, every bug report gets read, and every weekly call is small enough for people to actually speak. Past about {beta.cap}, that stops being true, and a beta where the founder cannot keep up is worse for everyone in it than a beta that turned some people away.</p>
+        <p>So the cap is real and it is the only scarcity here. No countdown, no counter, no seats-remaining ticker. If more than {beta.cap} people apply, the form below is how the cohort gets chosen, which is also why it asks more than a signup form would.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--rule">
+    <div class="container grid grid-split">
+      <div class="section-head">
+        <h2>What you get for it</h2>
+      </div>
+      <div class="rows raised raised--tight">
+        <div class="row"><p class="row-label">The tool, early</p><p>Full access to Sondor for the beta, including the {tiers.premium.name} tools, ahead of anyone who is not in the cohort.</p></div>
+        <div class="row"><p class="row-label">A founding rate</p><p>If you subscribe when Sondor launches publicly, you pay the founding rate: ${beta.foundingBasic} a month for {tiers.basic.name} and ${beta.foundingPremium} a month for {tiers.premium.name}, against ${tiers.basic.price} and ${tiers.premium.price} for everyone else. The rate holds for as long as your subscription stays active.</p></div>
+        <div class="row"><p class="row-label">A say in it</p><p>The people in this group shape what ships, from the names of the plans to how the interview behaves. That happens on the weekly call, where the person building it is taking notes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--rule band">
+    <div class="container grid grid-split founder">
+      <div class="founder-side">
+        <p class="eyebrow">From Logan</p>
+        <h2>Why I built it</h2>
+        <div class="photo">
+          <Placeholder label="Photograph of Logan Hart" size="800 × 1000 px, 4:5 portrait, JPEG or WebP" ratio="4 / 5" maxWidth="18rem" />
+        </div>
+      </div>
+      <div class="prose story">
+        <p>Sondor was created out of a personal need of my own. I've been a content creator for quite some time now, with multiple brands and platforms all vying for my attention and participation. That's a lot for any one human to manage.</p>
+        <p>Since the release and increasingly easy access of AI, I've been feeling that pressure to utilize such tools, because there's no denying the asymmetrical boon to productivity and consistency it offers. However, that pressure and draw has been heavily fraught and counterbalanced by a very strong and utter disgust at the torrential onslaught of AI slop, seemingly spreading like the Borg from Star Trek, infecting even very talented writers I've been following for a while. So no matter how strong that pull to lean on these tools felt, it never quite felt right. I felt like a hypocrite, participating in something I so palpably loathed to see from others.</p>
+        <p>So that's where the initial idea was born: how can I use AI to help me write more efficiently, without telling it to write for me? I've always been fascinated and impressed by the Socratic Method. I love how using questions rather than statements naturally cuts through and takes a direct pathway to truth, and by its nature, it's all about using the answers verbatim. That's how the first prototype of what would eventually become Sondor was born: a single training doc, an instruction file for AI to follow to conduct these interviews. I tested it on myself, and the results surpassed even my optimistic expectations.</p>
+        <p>Sondor is built, but I need people to test it, to break it, to help me make it better. I want to keep the group somewhat small and intimate, so it's easier to keep track of and have real relationships with the people involved. I only want people who are serious about writing, serving others through their content, and utilizing AI ethically and authentically. I can't remember the last time I've been this excited about something I'm building, and I genuinely cannot wait to see what other people can do with this tool.</p>
+        <p class="sign serif">Logan</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--rule" id="apply">
+    <div class="container grid grid-split">
+      <div class="section-head apply-head">
+        <h2>Apply</h2>
+        <p id="apply-intro" class="lede">This is early and rough around the edges. Screens will change under you, some things will break, and the person fixing them is the same person reading this form. If that sounds like a reason to wait, wait. If it sounds like the interesting part, apply.</p>
+        <p class="muted">Six required questions and one optional one. Applications are read by hand. Approvals go out by email with an access code and the orientation details.</p>
+      </div>
+      <div class="raised form-panel"><ApplyForm /></div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .hero { padding-block: clamp(var(--s-16), 12vw, var(--s-32)) var(--s-20); }
+  .hero h1 { max-width: 18ch; margin-block-start: var(--s-3); }
+  .hero .lede { max-width: var(--measure-wide); margin-block-end: var(--s-10); }
+  .section-head h2 { max-width: 20ch; }
+  .tag { color: var(--text-muted); font-size: var(--text-lg); margin-block-start: var(--s-8); }
+  .founder-side { display: grid; gap: var(--s-3); align-content: start; }
+  .founder-side .photo { margin-block-start: var(--s-6); width: 100%; }
+  .story p { font-size: var(--text-lg); line-height: 1.6; }
+  .story .sign { font-size: var(--text-h3); margin-block-start: var(--s-8); }
+  .form-panel :global(.apply) { max-width: none; }
+  .apply-head { display: grid; gap: var(--s-5); align-content: start; }
+  .apply-head .lede { max-width: var(--measure); }
+  @media (min-width: 48em) { .apply-head { position: sticky; top: 6rem; } }
+  @media (max-width: 48em) { .section-head { margin-block-end: var(--s-2); } }
+</style>

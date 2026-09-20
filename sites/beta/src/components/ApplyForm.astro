@@ -1,0 +1,226 @@
+---
+/**
+ * Closed beta application form. Native HTML, client-side validation, success and error states.
+ *
+ * POSTs JSON to PUBLIC_BETA_APPLY_ENDPOINT. That endpoint does not exist yet and the variable is
+ * left unset; while unset, submitting shows a "not open yet" message instead of sending.
+ *
+ * PAYLOAD CONTRACT (the receiving endpoint is built against this, do not change casually):
+ *   POST <PUBLIC_BETA_APPLY_ENDPOINT>
+ *   Content-Type: application/json
+ *   {
+ *     "form_version": 1,                 // integer, bump when fields change
+ *     "submitted_at": "2026-09-13T18:04:11.532Z", // ISO 8601 UTC, set by the browser
+ *     "page": "beta.sondor.ai",          // string, fixed
+ *     "name": "…",                       // string, required, trimmed, 1..120 chars
+ *     "email": "…",                      // string, required, trimmed, lowercased, valid email
+ *     "source": "friend" | "facebook" | "instagram" | "youtube" | "other",  // required
+ *     "source_detail": "…",              // string, may be "", required when source is "other", max 300
+ *     "writing": "…",                    // string, required, 1..600 chars
+ *     "publishing": "…",                 // string, required, 1..600 chars
+ *     "commitment": true,                // boolean, always true (form cannot submit otherwise)
+ *     "notes": "…"                       // string, may be "", max 2000
+ *   }
+ *   Expected response: any 2xx means accepted. Anything else, a network failure, or a timeout
+ *   (15 s) shows the error state with the contact email. The browser does not read the body.
+ *   A hidden honeypot field ("website") is never sent; if it is filled, nothing is sent and the
+ *   success state is shown.
+ */
+import { contact, beta } from '@sondor/design/config';
+const endpoint = import.meta.env.PUBLIC_BETA_APPLY_ENDPOINT ?? '';
+---
+<form id="apply-form" class="apply" novalidate data-endpoint={endpoint} data-email={contact.email} aria-describedby="apply-intro">
+  <div class="field">
+    <label for="f-name">Name</label>
+    <input class="input" id="f-name" name="name" type="text" autocomplete="name" required maxlength="120" />
+    <p class="error" id="e-name">Your name, so the approval email has someone to address.</p>
+  </div>
+
+  <div class="field">
+    <label for="f-email">Email</label>
+    <input class="input" id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200" />
+    <p class="error" id="e-email">A working email address. Approvals and the access code go here.</p>
+  </div>
+
+  <div class="field">
+    <label for="f-source">How did you hear about Sondor?</label>
+    <select class="input" id="f-source" name="source" required>
+      <option value="" selected disabled>Choose one</option>
+      <option value="friend">A friend, or word of mouth</option>
+      <option value="facebook">Facebook</option>
+      <option value="instagram">Instagram</option>
+      <option value="youtube">YouTube</option>
+      <option value="other">Somewhere else</option>
+    </select>
+    <p class="error" id="e-source">Pick the closest one.</p>
+  </div>
+
+  <div class="field">
+    <label for="f-source-detail">Who, or where, exactly? <span class="muted">(short)</span></label>
+    <input class="input" id="f-source-detail" name="source_detail" type="text" maxlength="300" placeholder="A name, a channel, a group, a post" />
+    <p class="hint">Optional unless you chose "somewhere else". It helps to know which door people are coming through.</p>
+    <p class="error" id="e-source-detail">Say where, in a few words.</p>
+  </div>
+
+  <div class="field">
+    <label for="f-writing">What do you write, or want to write?</label>
+    <textarea class="input" id="f-writing" name="writing" required maxlength="600" rows="3" placeholder="Subject, form, audience. A sentence or two is plenty."></textarea>
+    <p class="error" id="e-writing">A sentence or two about what you write.</p>
+  </div>
+
+  <div class="field">
+    <label for="f-publishing">Where do you publish, and how often are you posting right now?</label>
+    <textarea class="input" id="f-publishing" name="publishing" required maxlength="600" rows="3" placeholder="Platforms and a rough cadence. Honest answers beat impressive ones."></textarea>
+    <p class="hint">"Nowhere yet" is a fine answer. Current cadence is the best predictor of who will actually run sessions in a four-week window, so it matters.</p>
+    <p class="error" id="e-publishing">Where you publish, and roughly how often.</p>
+  </div>
+
+  <div class="field">
+    <label class="check" for="f-commitment">
+      <input id="f-commitment" name="commitment" type="checkbox" required />
+      <span>I understand the beta runs about {beta.weeksWord} weeks and includes a weekly group call on Discord, with a required orientation session, and I can commit to that.</span>
+    </label>
+    <p class="error" id="e-commitment">Agreeing to this is a condition of applying. If the calls will not work for you, this round is not the right fit, and that is fine.</p>
+  </div>
+
+  <div class="field">
+    <label for="f-notes">Anything else you want to tell me? <span class="muted">(optional)</span></label>
+    <textarea class="input" id="f-notes" name="notes" maxlength="2000" rows="4"></textarea>
+  </div>
+
+  <!-- Honeypot. Hidden from people, tempting to bots. Never sent. -->
+  <div class="hp" aria-hidden="true">
+    <label for="f-website">Website</label>
+    <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="submit">
+    <button class="btn btn-primary btn-lg" type="submit" id="apply-submit">Send my application</button>
+    <p class="small muted">Your answers go to Logan and nobody else. They are used to pick the cohort and for nothing after that.</p>
+  </div>
+
+  <div class="form-status" id="apply-status" role="status" aria-live="polite" hidden></div>
+</form>
+
+<style>
+  .apply { display: grid; gap: var(--s-8); max-width: var(--measure-wide); }
+  .apply .field label { max-width: none; }
+  .apply .field label .muted { font-weight: 400; }
+  .hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+  .submit { display: grid; gap: var(--s-4); justify-items: start; margin-block-start: var(--s-4); }
+  .submit .btn { min-width: 14rem; }
+  .form-status :global(h3) { font-family: var(--font-body); font-weight: 600; font-size: var(--text-h4); margin-block-end: var(--s-2); letter-spacing: 0; }
+  .form-status :global(p) { max-width: none; }
+  .form-status :global(p + p) { margin-block-start: var(--s-3); }
+</style>
+
+<script>
+  // The only JavaScript on the beta site. Validation, submission, and the three end states.
+  const form = document.getElementById('apply-form') as HTMLFormElement | null;
+  if (form) {
+    const endpoint = (form.dataset.endpoint || '').trim();
+    const email = form.dataset.email || '';
+    const status = document.getElementById('apply-status') as HTMLDivElement;
+    const submit = document.getElementById('apply-submit') as HTMLButtonElement;
+
+    const field = (name: string) => form.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+    const wrap = (el: Element) => el.closest('.field') as HTMLElement;
+    const setInvalid = (el: Element, bad: boolean) => {
+      const w = wrap(el);
+      if (!w) return;
+      if (bad) { w.setAttribute('data-invalid', ''); el.setAttribute('aria-invalid', 'true'); }
+      else { w.removeAttribute('data-invalid'); el.removeAttribute('aria-invalid'); }
+    };
+    const emailOk = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+
+    function validate(): boolean {
+      let firstBad: Element | null = null;
+      const check = (el: Element, ok: boolean) => { setInvalid(el, !ok); if (!ok && !firstBad) firstBad = el; };
+      const name = field('name'), em = field('email'), source = field('source') as HTMLSelectElement,
+        detail = field('source_detail'), writing = field('writing'), publishing = field('publishing'),
+        commitment = field('commitment') as HTMLInputElement;
+      check(name, name.value.trim().length > 0);
+      check(em, emailOk(em.value.trim()));
+      check(source, source.value !== '');
+      check(detail, source.value !== 'other' || detail.value.trim().length > 0);
+      check(writing, writing.value.trim().length > 0);
+      check(publishing, publishing.value.trim().length > 0);
+      check(commitment, commitment.checked);
+      if (firstBad) { (firstBad as HTMLElement).focus(); return false; }
+      return true;
+    }
+
+    // Clear a field's error as soon as it is corrected.
+    form.addEventListener('input', (e) => {
+      const el = e.target as Element;
+      if (el && wrap(el)?.hasAttribute('data-invalid')) setInvalid(el, false);
+    });
+
+    function show(kind: 'ok' | 'err' | 'closed', html: string) {
+      status.innerHTML = html;
+      status.dataset.kind = kind;
+      status.hidden = false;
+      status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.hidden = true;
+      if (!validate()) return;
+
+      // Honeypot filled: pretend it worked, send nothing.
+      if ((field('website') as HTMLInputElement).value) {
+        form.reset();
+        show('ok', '<h3>Application received</h3><p>Thanks. Approvals go out by email.</p>');
+        return;
+      }
+
+      const payload = {
+        form_version: 1,
+        submitted_at: new Date().toISOString(),
+        page: 'beta.sondor.ai',
+        name: field('name').value.trim(),
+        email: field('email').value.trim().toLowerCase(),
+        source: field('source').value,
+        source_detail: field('source_detail').value.trim(),
+        writing: field('writing').value.trim(),
+        publishing: field('publishing').value.trim(),
+        commitment: true,
+        notes: field('notes').value.trim(),
+      };
+
+      if (!endpoint) {
+        show('closed', `<h3>Applications are not open yet</h3><p>The form works but it has nowhere to send this yet. If you are reading this, the page went up ahead of the intake. Email <a href="mailto:${email}">${email}</a> with your answers and they will be counted.</p>`);
+        return;
+      }
+
+      submit.disabled = true;
+      const label = submit.textContent;
+      submit.textContent = 'Sending';
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 15000);
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: ctrl.signal,
+          mode: 'cors',
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        form.reset();
+        show('ok', `<h3>Application received</h3><p>Thanks, ${escapeHtml(payload.name)}. Every application is read by one person, so give it a few days. If it is a yes, the email carries your access code and the orientation details.</p>`);
+      } catch {
+        show('err', `<h3>That did not go through</h3><p>Nothing was lost, your answers are still in the form. Try again in a moment. If it keeps failing, email <a href="mailto:${email}">${email}</a> with the same answers and they will be counted.</p>`);
+      } finally {
+        clearTimeout(timer);
+        submit.disabled = false;
+        submit.textContent = label;
+      }
+    });
+
+    function escapeHtml(s: string) {
+      return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string);
+    }
+  }
+</script>

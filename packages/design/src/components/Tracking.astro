@@ -1,0 +1,34 @@
+---
+/**
+ * ─────────────────────────────────────────────────────────────────────────────
+ *  TRACKING SLOT. This is the one place on both sites where analytics and
+ *  tracking scripts live. Nothing else in the codebase loads a third-party tag.
+ *
+ *  Live today: Cloudflare Web Analytics only (cookieless, no consent banner).
+ *  It renders only when the site's token is set:
+ *      sites/sondor-ai   PUBLIC_CF_ANALYTICS_TOKEN   (in .env or the Pages project)
+ *      sites/beta        PUBLIC_CF_ANALYTICS_TOKEN
+ *  Get the token from Cloudflare dashboard, Web Analytics, Add a site,
+ *  and copy the "token" value from the snippet it shows.
+ *
+ *  Held until paid acquisition starts (Decision Log, Sept 5 2026):
+ *  Meta Pixel, GA4, or any other tag. When that day comes, add the script
+ *  inside the block marked FUTURE TAGS below, gated on its own PUBLIC_* env var
+ *  so an unset variable renders nothing. Do not add tags anywhere else.
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+interface Props { analyticsToken?: string }
+const { analyticsToken } = Astro.props;
+const beacon = analyticsToken ? JSON.stringify({ token: analyticsToken }) : undefined;
+---
+{beacon && (
+  <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={beacon}></script>
+)}
+
+{/* ── FUTURE TAGS ────────────────────────────────────────────────────────────
+     Example shape, kept as a comment until a decision to add a tag exists:
+
+     const metaPixelId = import.meta.env.PUBLIC_META_PIXEL_ID;
+     {metaPixelId && (<script is:inline define:vars={{ metaPixelId }}> ...pixel bootstrap... </script>)}
+
+   ──────────────────────────────────────────────────────────────────────────── */}

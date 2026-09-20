@@ -1,0 +1,10 @@
+---
+/** Primary call to action. One action on the whole site: start the free trial. */
+import { trial } from '@sondor/design/config';
+interface Props { center?: boolean; large?: boolean; label?: string; note?: string | false }
+const { center = false, large = false, label = trial.ctaLabel, note = trial.ctaNote } = Astro.props;
+---
+<div class={`cta ${center ? 'cta--center' : ''}`}>
+  <a class={`btn btn-primary ${large ? 'btn-lg' : ''}`} href={trial.url}>{label}</a>
+  {note && <p class="note">{note} <a class="link" href="/pricing#trial">Trial terms</a></p>}
+</div>

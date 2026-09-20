@@ -1,0 +1,13 @@
+---
+/** Icon-only mark (sondor final-04.svg) with a settable fill. Used as a decorative watermark. */
+import svg from '../../assets/sondor-mark-fog.svg?raw';
+interface Props { fill?: string; class?: string }
+const { fill = 'currentColor', class: cls = '' } = Astro.props;
+const inline = svg
+  .replace(/<\?xml[^>]*>/, '')
+  .replace(/<defs>[\s\S]*?<\/defs>/, '')
+  .replace(/class="cls-1"/g, `fill="${fill}"`)
+  .replace('<svg ', `<svg aria-hidden="true" focusable="false" class="${cls}" `)
+  .replace(/id="Layer_1" data-name="Layer 1" /, '');
+---
+<Fragment set:html={inline} />

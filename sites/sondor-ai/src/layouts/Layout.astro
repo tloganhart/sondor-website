@@ -1,0 +1,53 @@
+---
+import Head from '@sondor/design/components/Head.astro';
+import Header from '@sondor/design/components/Header.astro';
+import Footer from '@sondor/design/components/Footer.astro';
+import { trial, contact } from '@sondor/design/config';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+const { title, description, noindex } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const current = Astro.url.pathname;
+
+const nav = [
+  { href: '/how-it-works', label: 'How it works' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/about', label: 'About' },
+];
+const cta = { href: trial.url, label: trial.ctaLabel };
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head {title} {description} {canonical} {noindex} analyticsToken={import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN} />
+  </head>
+  <body>
+    <Header links={nav} {cta} {current} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer
+      note="A writing tool that refuses to write for you. It interviews you, then builds from your own words."
+      columns={[
+        { heading: 'Product', links: [
+          { href: '/how-it-works', label: 'How it works' },
+          { href: '/pricing', label: 'Pricing' },
+          { href: '/pricing#trial', label: 'Trial terms' },
+          { href: trial.url, label: trial.ctaLabel },
+        ]},
+        { heading: 'Company', links: [
+          { href: '/about', label: 'About' },
+          { href: `mailto:${contact.email}`, label: 'Contact' },
+        ]},
+      ]}
+      legal={[
+        { href: '/privacy', label: 'Privacy policy' },
+        { href: '/terms', label: 'Terms of service' },
+      ]}
+    />
+  </body>
+</html>

@@ -1,0 +1,60 @@
+---
+import Logo from './Logo.astro';
+import { contact } from '../config';
+
+interface Link { href: string; label: string }
+interface Props {
+  columns?: { heading: string; links: Link[] }[];
+  legal?: Link[];
+  note?: string;
+}
+const { columns = [], legal = [], note } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="top">
+      <div class="brand">
+        <Logo height="24px" />
+        {note && <p class="muted small note">{note}</p>}
+      </div>
+      {columns.map((c) => (
+        <div class="col">
+          <p class="eyebrow">{c.heading}</p>
+          <ul>
+            {c.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <div class="bottom">
+      <p class="small muted">&copy; {year} Sondor. <a href={`mailto:${contact.email}`}>{contact.email}</a></p>
+      {legal.length > 0 && (
+        <ul class="legal">
+          {legal.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      )}
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { border-top: 1px solid var(--rule); padding-block: var(--s-16) var(--s-10); margin-block-start: var(--s-16); }
+  .top { display: grid; gap: var(--s-10) var(--s-12); grid-template-columns: 1fr; }
+  @media (min-width: 48em) { .top { grid-template-columns: 1.6fr repeat(var(--cols, 2), 1fr); } }
+  .brand { display: grid; gap: var(--s-4); align-content: start; }
+  .note { max-width: 22rem; }
+  ul { list-style: none; padding: 0; margin: var(--s-2) 0 0; display: grid; gap: 0; }
+  .col a, .legal a, .bottom a {
+    display: inline-flex; align-items: center; min-height: 40px;
+    color: var(--text-muted); text-decoration: none;
+    transition: color var(--dur) var(--ease);
+  }
+  .col a:hover, .legal a:hover, .bottom a:hover { color: var(--text); text-decoration: underline; text-underline-offset: 0.2em; }
+  .bottom {
+    margin-block-start: var(--s-12); padding-block-start: var(--s-6); border-top: 1px solid var(--rule);
+    display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-8); align-items: center; justify-content: space-between;
+  }
+  .legal { margin: 0; display: flex; gap: var(--s-6); }
+  .legal a { font-size: var(--text-sm); }
+</style>

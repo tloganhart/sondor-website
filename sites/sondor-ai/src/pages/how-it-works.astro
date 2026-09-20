@@ -1,0 +1,128 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Placeholder from '@sondor/design/components/Placeholder.astro';
+import { tiers, trial } from '@sondor/design/config';
+
+const title = 'How Sondor works, from first question to finished piece';
+const description = "Sondor runs a Socratic interview, keeps your answers word for word in your own Notion, and builds pieces from that transcript. What the AI does and won't do.";
+---
+<Layout {title} {description}>
+
+  <section class="section page-head hero-field">
+    <div class="container">
+      <p class="eyebrow">How it works</p>
+      <h1>A method, with the AI on the asking side of the table</h1>
+      <p class="lede">Most writing tools put the AI where the writer should be. Sondor puts it where the interviewer sits. This page walks through what that means in practice: what happens in a session, what the software is allowed to do, and what it will refuse.</p>
+    </div>
+  </section>
+
+  <!-- The method -->
+  <section class="section section--rule">
+    <div class="container grid grid-split">
+      <SectionHead title="Questions, then more questions" />
+      <div class="prose">
+        <p>The interview is built on the Socratic method. Instead of asking you to state a position, Sondor asks a question, listens to the answer, and asks the next question based on what you just said. When an answer is vague, it asks for the specific case. When you make a claim, it asks for the story behind it. When you contradict something you said ten minutes earlier, it points that out and asks which one you mean.</p>
+        <p>This is slower than typing a prompt. It is also how people arrive at what they actually think. Most of us do our best reasoning while explaining something to someone who keeps asking why, and almost none of that reasoning survives the walk to the keyboard. A session captures it while it is happening.</p>
+        <p>You can speak your answers or type them. Speaking is faster and tends to produce better material, because you stop editing yourself mid-sentence. The transcript is kept either way.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ways to start -->
+  <section class="section section--rule">
+    <div class="container">
+      <SectionHead title="Ways into a session" lede="Every route ends in the same place, a transcript of your own words. They differ in where they start." />
+      <div class="rows raised raised--tight">
+        <div class="row"><p class="row-label">From a topic</p><p>Name what you want to write about. Sondor interviews you on it until there is enough to build from.</p></div>
+        <div class="row"><p class="row-label">From your map</p><p>Sondor picks from the topical map, the record of what you have already said you care about, and finds the thread you have not pulled yet.</p></div>
+        <div class="row"><p class="row-label">From something you already wrote</p><p>Paste in a draft, a thread, an old post. Sondor reads it and interviews you about it, so the new piece builds on what you said rather than starting cold.</p></div>
+        <div class="row"><p class="row-label">Quick rounds</p><p>One topic, several short answers, each one becoming its own short piece straight away. For the days when you have opinions and no time.</p></div>
+        <div class="row"><p class="row-label">Several topics at once</p><p>Bring a handful of loosely related things and talk through them one at a time. Sondor assembles a single longer piece and marks the seams where it joined them.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What gets kept -->
+  <section class="section section--rule band">
+    <div class="container grid grid-split">
+      <SectionHead title="What the software keeps" />
+      <div class="prose">
+        <p>The transcript, in full, in your own Notion workspace. Sondor does not hold your content on its servers, and it does not use it to train anything. If you cancel, or if Sondor were to close, the workspace and everything in it would still be yours and still be readable.</p>
+        <p>Alongside the transcript, Sondor keeps a profile of how you write and speak. It records your recurring ideas and the positions you hold, the stories you return to, the words and phrasings that are yours, and the way you tend to open and close a thought. None of it is a questionnaire. All of it comes from what you said in sessions, and it gets more accurate the more you run.</p>
+        <p>The topical map sits on top of that. It is a picture of the territory you actually cover, and it is useful for two things: seeing where you have real depth, and noticing the topics you keep circling without ever finishing a thought on.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container media-row">
+    <Placeholder label="Screenshot of the topical map, populated with a real account's pillars and topics" size="1600 × 1000 px, 16:10, PNG or WebP" ratio="16 / 10" />
+  </div>
+
+  <!-- Assembly and the rules -->
+  <section class="section section--rule">
+    <div class="container grid grid-split">
+      <SectionHead title="How a piece gets assembled, and the rules it follows" />
+      <div class="prose">
+        <p>When the interview has enough material, Sondor arranges it into a piece in the format you asked for. It selects, orders and trims. It does not compose. Every sentence in the piece traces back to a line in your transcript, and you can see the trace.</p>
+        <p>There are a few narrow places where a phrase you did not say may be needed. The most common is a seam: two of your thoughts that belong next to each other but need a few connecting words to read as one paragraph. In those cases Sondor first asks you to supply the words yourself. If you would rather it suggest something, it offers directions rather than finished prose, and anything that ends up in the piece that you did not say is marked as an addition, shown to you, and kept only if you approve it. A piece with zero additions is a real and common outcome.</p>
+        <p>The same rule covers what Sondor will not do. It will not write a paragraph to fill a gap in your argument. It will not supply an opinion you did not give. When it hits a gap, it asks you another question, and if you have nothing to say on the point, it says so rather than inventing something.</p>
+        <p>Revision works the same way. After a piece is assembled, Sondor can point out where an argument is thin, where a phrasing repeats, where a claim has no example behind it. It suggests. You decide, and when a change needs new words, they come from you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Provenance -->
+  <section class="section section--rule band">
+    <div class="container grid grid-split">
+      <SectionHead title="Proving it was you" />
+      <div class="prose">
+        <p>A finished piece can carry a provenance mark. It is a link to a page showing the piece and what it is made of: your words throughout, plus any approved additions named exactly as they were added. Anyone who doubts a byline can open it. Given how readers feel about generated writing now, being able to show your work is worth something, and it costs nothing to include.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container media-row">
+    <Placeholder label="Screenshot of a finished piece and its provenance page side by side" size="1600 × 1000 px, 16:10, PNG or WebP" ratio="16 / 10" />
+  </div>
+
+  <!-- Repurposing, deliberately placed low -->
+  <section class="section section--rule">
+    <div class="container grid grid-split">
+      <SectionHead title="One transcript, several pieces" />
+      <div class="prose">
+        <p>Because the material is your transcript rather than a single draft, the same session can be shaped into more than one thing: a long post, a short thread, a script, a newsletter section. Each version is built from the same words, and each one follows the same rules about additions. The point is that a good hour of talking should not produce one artefact and then expire.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What lives where -->
+  <section class="section section--rule band">
+    <div class="container grid grid-split">
+      <SectionHead title="Where it runs" />
+      <div class="prose">
+        <p>Sondor is an app for desktop and web, with a mobile app for running sessions when you are away from a desk. Your content lives in Notion, so you need a Notion account, and connecting it is the first step after signing up. Subscribing happens inside the app on desktop or web. The {trial.days}-day trial includes the {tiers.premium.name} tools on a limited budget, and there is no card to enter. The <a href="/pricing#trial">trial terms</a> spell out the rest.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section closing hero-field">
+    <div class="container">
+      <h2>The fastest way to understand it is to answer one question.</h2>
+      <Cta large center />
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .page-head { padding-block: var(--s-20) var(--s-12); }
+  .page-head h1 { max-width: 22ch; margin-block-start: var(--s-3); }
+  .page-head .lede { margin-block-start: var(--s-6); max-width: var(--measure-wide); }
+  .media-row { padding-block: var(--s-4) var(--s-8); }
+  .media-row :global(.placeholder) { max-width: 60rem; box-shadow: var(--shadow); }
+  .closing { text-align: center; padding-block: var(--s-32) var(--s-24); border-top: 1px solid var(--rule-teal); border-bottom: 0; }
+  .closing h2 { margin-inline: auto; margin-block-end: var(--s-10); max-width: 26ch; }
+  .closing :global(.cta) { margin-inline: auto; }
+</style>

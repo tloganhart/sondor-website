@@ -1,0 +1,134 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { tiers, trial } from '@sondor/design/config';
+
+const title = 'Sondor pricing, two plans and a 14-day trial with no card';
+const description = 'Two monthly plans, $39 and $59, no free tier and no annual lock-in. Every account starts with a 14-day trial of the Premium tools, no card. Trial terms, plain.';
+---
+<Layout {title} {description}>
+
+  <section class="section page-head hero-field">
+    <div class="container">
+      <h1>Pricing</h1>
+      <p class="lede">Two plans, billed monthly, cancel whenever you like. Every account starts with a {trial.days}-day free trial of the {tiers.premium.name} tools and no card on file.</p>
+    </div>
+  </section>
+
+  <section class="section--tight plans-wrap">
+    <div class="container">
+      <div class="grid grid-2 plans">
+
+        <article class="plan raised raised--lift" aria-labelledby="plan-basic">
+          <h2 id="plan-basic">{tiers.basic.name}</h2>
+          <p class="price"><span class="amount">${tiers.basic.price}</span><span class="per">per month</span></p>
+          <p class="plan-summary">The full interview and assembly method, for one writer publishing as one voice.</p>
+          <ul class="includes">
+            <li>Interview sessions, spoken or typed, as many as you want</li>
+            <li>Your voice profile, built from your sessions and refined over time</li>
+            <li>Your topical map</li>
+            <li>Assembly of finished pieces from your own transcript</li>
+            <li>Repurposing the same words into other formats</li>
+            <li>Provenance mark on any finished piece</li>
+            <li>Everything stored in your own Notion workspace</li>
+            <li>One brand or voice</li>
+          </ul>
+        </article>
+
+        <article class="plan raised raised--lift plan--premium" aria-labelledby="plan-premium">
+          <h2 id="plan-premium">{tiers.premium.name}</h2>
+          <p class="price"><span class="amount">${tiers.premium.price}</span><span class="per">per month</span></p>
+          <p class="plan-summary">{tiers.premium.summary} For people who run more than one brand, who bring existing recordings into the work, or who interview other people.</p>
+          <ul class="includes">
+            <li>Everything in {tiers.basic.name}</li>
+            <li>More than one brand or voice, each with its own profile and map</li>
+            <li>Transcription of audio and video you already have, so old recordings become raw material</li>
+            <li>Image generation for finished pieces</li>
+            <li>Guest Rundown, for interviewing someone else and producing the write-up</li>
+            <li>A larger weekly allowance for the heavier tools</li>
+          </ul>
+        </article>
+
+      </div>
+      <p class="muted plan-foot">Prices in US dollars. Tax may apply depending on where you live. You subscribe inside the app, on desktop or web, once the trial has shown you whether it fits.</p>
+      <div class="plans-cta"><Cta large /></div>
+    </div>
+  </section>
+
+  <!-- Trial terms. Required to exist and to be findable: linked from every CTA note, the footer, and the FAQ. -->
+  <section class="section section--rule band" id="trial">
+    <div class="container grid grid-split">
+      <SectionHead eyebrow="Trial terms" title="What the free trial is, exactly" />
+      <div class="rows raised raised--tight">
+        <div class="row"><p class="row-label">Length</p><p>{trial.days} days from the day you create your account.</p></div>
+        <div class="row"><p class="row-label">What's included</p><p>The {tiers.premium.name} tools, on a limited budget. You get a handful of uses of each {tiers.premium.name} feature, enough to find out what they do for you, and the full {tiers.basic.name} method throughout.</p></div>
+        <div class="row"><p class="row-label">Card</p><p>None. You do not enter payment details to start, so nothing is charged when the trial ends.</p></div>
+        <div class="row"><p class="row-label">At the end</p><p>The app locks to an upgrade screen until you choose a plan. That is all that happens. Every transcript, profile, map and piece from the trial is in your own Notion workspace and stays there whether you subscribe or not. Nothing is deleted and nothing is held back from you.</p></div>
+        <div class="row"><p class="row-label">If you subscribe</p><p>You pick {tiers.basic.name} or {tiers.premium.name} inside the app and carry on where you left off. Billing starts the day you subscribe.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--rule">
+    <div class="container grid grid-split">
+      <SectionHead title="Pricing questions" />
+      <div class="faq raised raised--tight">
+        <details>
+          <summary>Is there a free plan?</summary>
+          <div><p>No. There is a {trial.days}-day trial with no card, which is meant to answer the same question a free plan would. Each session uses real AI processing that costs money to run, and a permanent free tier would mean building around people who never pay rather than the people who do.</p></div>
+        </details>
+        <details>
+          <summary>Do you offer refunds or a money-back guarantee?</summary>
+          <div><p>No prorated refunds for partial months, and no separate guarantee. The trial exists so you can decide before you pay anything. If something has gone wrong with your billing, email <a href="mailto:hello@sondor.ai">hello@sondor.ai</a> and it will be sorted out. The full position is in the <a href="/terms">terms of service</a>.</p></div>
+        </details>
+        <details>
+          <summary>What is the weekly allowance?</summary>
+          <div><p>Some features use extra AI processing beyond an ordinary session: transcription, image generation, Guest Rundown, and a few others. Those draw from a weekly allowance that resets each week and does not roll over. Normal conversational sessions are not metered and are always available. If you use up the week's allowance, the heavier features pause until it resets and everything else keeps working. {tiers.premium.name} carries a larger allowance than {tiers.basic.name}.</p></div>
+        </details>
+        <details>
+          <summary>Can I switch between {tiers.basic.name} and {tiers.premium.name}?</summary>
+          <div><p>Yes, from inside the app. Moving up mid-cycle is prorated so you only pay for the part of the month you are on the higher plan.</p></div>
+        </details>
+        <details>
+          <summary>What happens to my content if I cancel?</summary>
+          <div><p>You keep access to the app until the end of the period you have paid for. Your content was never on Sondor's servers in the first place. It lives in your Notion workspace, under your account, and it stays there after you cancel, readable without Sondor.</p></div>
+        </details>
+        <details>
+          <summary>Is there an annual plan?</summary>
+          <div><p>Not yet. Both plans are monthly. If an annual option is added, existing subscribers will hear about it by email first.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section closing hero-field">
+    <div class="container">
+      <h2>Try the whole thing for {trial.days} days.</h2>
+      <Cta large center />
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .page-head { padding-block: var(--s-20) var(--s-12); }
+  .page-head .lede { margin-block-start: var(--s-6); max-width: var(--measure-wide); }
+  .plans { max-width: 62rem; align-items: stretch; }
+  .plans-wrap { padding-block-start: var(--s-12); }
+  .plan { display: grid; gap: var(--s-5); align-content: start; }
+  .plan--premium { border-color: color-mix(in srgb, var(--steel) 60%, var(--fog) 20%); }
+  .plan h2 { font-family: var(--font-body); font-weight: 600; font-size: var(--text-h4); letter-spacing: 0; }
+  .price { display: flex; align-items: baseline; gap: var(--s-2); font-family: var(--font-display); }
+  .amount { font-size: var(--text-h1); line-height: 1; letter-spacing: -0.02em; }
+  .per { color: var(--text-muted); font-family: var(--font-body); }
+  .plan-summary { font-size: var(--text-lg); line-height: 1.5; }
+  .includes { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-3); border-top: 1px solid var(--rule); padding-block-start: var(--s-5); }
+  .includes li { padding-inline-start: 1.5rem; position: relative; }
+  .includes li::before { content: ''; position: absolute; left: 0; top: 0.72em; width: 0.75rem; height: 1px; background: var(--rule-strong); }
+  .plans-cta { margin-block-start: var(--s-10); }
+  .plan-foot { margin-block-start: var(--s-8); max-width: var(--measure-wide); }
+  .closing { text-align: center; padding-block: var(--s-32) var(--s-24); border-top: 1px solid var(--rule-teal); border-bottom: 0; }
+  .closing h2 { margin-inline: auto; margin-block-end: var(--s-10); }
+  .closing :global(.cta) { margin-inline: auto; }
+</style>

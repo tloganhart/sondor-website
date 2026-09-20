@@ -1,0 +1,28 @@
+{
+  "name": "sondor-web",
+  "private": true,
+  "version": "0.1.0",
+  "description": "sondor.ai marketing site and beta.sondor.ai closed-beta page. Two Astro static sites, one shared design system.",
+  "workspaces": [
+    "packages/*",
+    "sites/*"
+  ],
+  "scripts": {
+    "dev:main": "npm run dev -w sites/sondor-ai",
+    "dev:beta": "npm run dev -w sites/beta",
+    "build": "npm run build -w sites/sondor-ai && npm run build -w sites/beta",
+    "build:main": "npm run build -w sites/sondor-ai",
+    "build:beta": "npm run build -w sites/beta",
+    "check": "node scripts/check-copy.mjs && node scripts/check-seo.mjs",
+    "lint:copy": "node scripts/check-copy.mjs",
+    "lint:seo": "node scripts/check-seo.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "lighthouse": "^13.4.1",
+    "playwright": "^1.63.0",
+    "sharp": "^0.35.4"
+  }
+}
