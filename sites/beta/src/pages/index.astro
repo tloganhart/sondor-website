@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ApplyForm from '../components/ApplyForm.astro';
-import Placeholder from '@sondor/design/components/Placeholder.astro';
 import Mark from '@sondor/design/components/Mark.astro';
 import { beta, tiers, tagline } from '@sondor/design/config';
 
@@ -82,7 +81,15 @@ const description = 'Sondor is a writing tool that refuses to write for you. It 
         <p class="eyebrow">From Logan</p>
         <h2>Why I built it</h2>
         <div class="photo">
-          <Placeholder label="Photograph of Logan Hart" size="800 × 1000 px, 4:5 portrait, JPEG or WebP" ratio="4 / 5" maxWidth="18rem" />
+          <img
+            src="/founder-logan-hart.jpg"
+            alt="Logan Hart, who built Sondor: a bearded man in a cream knit sweater, resting his chin on his hand and smiling slightly, in front of shelves of books."
+            width="800"
+            height="1000"
+            loading="lazy"
+            decoding="async"
+            style="width: 100%; max-width: 18rem; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-lg);"
+          />
         </div>
       </div>
       <div class="prose story">

@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Cta from '../components/Cta.astro';
-import Placeholder from '@sondor/design/components/Placeholder.astro';
 
 const title = 'About Sondor and the writer who built it out of necessity';
 const description = 'Built by one content creator who wanted the efficiency of AI without handing over his voice. The founder story in his own words, and why Socrates was the fix.';
@@ -16,7 +15,14 @@ const description = 'Built by one content creator who wanted the efficiency of A
         <p class="lede">Sondor is made by Logan Hart, a content creator who runs several brands and got tired of choosing between falling behind and adding to the slop. What follows is his account of how it came about, in his own words. It was extracted the way every Sondor piece is: in a session, from a transcript, with the phrasing kept and nothing added.</p>
       </div>
       <div class="photo">
-        <Placeholder label="Photograph of Logan Hart, the founder. The one photograph on the site." size="1200 × 1500 px, 4:5 portrait, JPEG or WebP" ratio="4 / 5" maxWidth="26rem" />
+        <img
+          src="/founder-logan-hart.png"
+          alt="Logan Hart, who built Sondor: a bearded man in a cream knit sweater, resting his chin on his hand and smiling slightly, in front of shelves of books."
+          width="1600"
+          height="2000"
+          decoding="async"
+          style="width: 100%; max-width: 26rem; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-lg);"
+        />
       </div>
     </div>
   </section>
