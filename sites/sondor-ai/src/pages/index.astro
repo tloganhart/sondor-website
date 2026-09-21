@@ -212,10 +212,26 @@ const description = 'Sondor interviews you, keeps what you said word for word, a
 
 <style>
   .hero { padding-block: clamp(var(--s-16), 12vw, var(--s-32)) var(--s-20); }
-  .hero h1 { max-width: 20ch; }
+  /* 24ch, not 20ch: at full size the headline breaks into 3 lines instead of
+     4, which alone gives back one full headline line of height. */
+  .hero h1 { max-width: 24ch; }
   .tagline { color: var(--text-muted); font-size: var(--text-lg); margin-block-end: var(--s-6); }
   .hero .lede { max-width: var(--measure); margin-block-end: var(--s-10); }
   .hero .ink { margin-block: var(--s-8) var(--s-8); }
+
+  /* THE HERO FITS A SHORT WINDOW. The spacing above scales with the window's
+     WIDTH, so a wide-but-short screen (1920 at Windows' 125% scaling is
+     1536x702 in CSS pixels, after browser chrome) got the maximum padding and
+     pushed the button below the fold. On windows up to 56em tall this tightens
+     the vertical rhythm and lets the headline shrink with the height, so the
+     whole hero, button included, fits. Taller windows are untouched. */
+  @media (max-height: 56em) {
+    .hero { padding-block: var(--s-10) var(--s-10); }
+    .hero h1 { font-size: min(var(--text-h1), 10vh); }
+    .tagline { margin-block-end: var(--s-4); }
+    .hero .ink { margin-block: var(--s-6) var(--s-6); }
+    .hero .lede { margin-block-end: var(--s-8); }
+  }
 
   .steps { margin-block-end: var(--s-12); gap: var(--s-6); }
   .step { display: grid; gap: var(--s-3); align-content: start; }

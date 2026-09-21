@@ -116,8 +116,22 @@ const description = 'Sondor is a writing tool that refuses to write for you. It 
 
 <style>
   .hero { padding-block: clamp(var(--s-16), 12vw, var(--s-32)) var(--s-20); }
-  .hero h1 { max-width: 18ch; margin-block-start: var(--s-3); }
+  /* 28ch, not 18ch: at full size the headline breaks into 2 lines instead of
+     3, which alone gives back one full headline line of height. */
+  .hero h1 { max-width: 28ch; margin-block-start: var(--s-3); }
   .hero .lede { max-width: var(--measure-wide); margin-block-end: var(--s-10); }
+
+  /* THE HERO FITS A SHORT WINDOW. Same rule and same reason as the sondor.ai
+     home page: the spacing above scales with the window's WIDTH, so a
+     wide-but-short screen (1920 at 125% scaling is 1536x702 in CSS pixels)
+     got the maximum padding and pushed the Apply button below the fold. On
+     windows up to 56em tall the vertical rhythm tightens and the headline
+     shrinks with the height. Taller windows are untouched. */
+  @media (max-height: 56em) {
+    .hero { padding-block: var(--s-10) var(--s-10); }
+    .hero h1 { font-size: min(var(--text-h1), 10vh); }
+    .hero .lede { margin-block-end: var(--s-8); }
+  }
   .section-head h2 { max-width: 20ch; }
   .tag { color: var(--text-muted); font-size: var(--text-lg); margin-block-start: var(--s-8); }
   .founder-side { display: grid; gap: var(--s-3); align-content: start; }
