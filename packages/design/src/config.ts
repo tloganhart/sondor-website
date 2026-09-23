@@ -18,6 +18,23 @@ export const tiers = {
   },
 } as const;
 
+/**
+ * Annual billing. Ten months charged for twelve, which is the literal meaning of
+ * "2 months free" and the reason the saving is never shown as a percentage
+ * (Decision Log, "Referral program compensation", Aug 25 2026; the $390 and $590
+ * figures confirmed Sep 22 2026).
+ *
+ * Derived from the monthly price rather than typed a second time, so the yearly
+ * figure cannot drift away from the monthly one it is meant to be ten times.
+ */
+export const annual = {
+  monthsCharged: 10,
+  /** Always this phrasing. Never "17%", never any other percentage. */
+  label: '2 months free',
+} as const;
+
+export const annualPrice = (monthlyPrice: number): number => monthlyPrice * annual.monthsCharged;
+
 export const trial = {
   days: 14,
   cardRequired: false,

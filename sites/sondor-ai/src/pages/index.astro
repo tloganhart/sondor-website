@@ -4,7 +4,7 @@ import Cta from '../components/Cta.astro';
 import SectionHead from '../components/SectionHead.astro';
 import Placeholder from '@sondor/design/components/Placeholder.astro';
 import Mark from '@sondor/design/components/Mark.astro';
-import { tiers, trial, tagline } from '@sondor/design/config';
+import { tiers, trial, tagline, annual, annualPrice } from '@sondor/design/config';
 
 const title = 'Sondor | The writing tool that refuses to write for you';
 const description = 'Sondor interviews you, keeps what you said word for word, and builds finished pieces from your own sentences. For writers done with AI slop. Free 14 days.';
@@ -94,7 +94,7 @@ const description = 'Sondor interviews you, keeps what you said word for word, a
           <div class="row"><p class="row-label">Finished pieces</p><p>Posts, essays, scripts, threads. Assembled from your transcript, in your order or a better one, ready to publish or to edit further.</p></div>
           <div class="row"><p class="row-label">A voice profile</p><p>A record of how you actually write and talk, built from what you said rather than from a questionnaire. It informs every later session.</p></div>
           <div class="row"><p class="row-label">A topical map</p><p>The territory of what you think about, drawn from your own sessions. It shows you where you have depth and where you keep circling.</p></div>
-          <div class="row"><p class="row-label">A provenance mark</p><p>A finished piece can carry a link anyone can open to see that the words came from you, with any added connective phrase named plainly.</p></div>
+          <div class="row"><p class="row-label">A provenance mark</p><p>A finished piece can carry a mark reading 100% verbatim, no AI prose. It links to a page showing what Sondor did and the promise you signed that the ideas and prose are yours.</p></div>
           <div class="row"><p class="row-label">Your own Notion</p><p>Everything lives in your workspace, under your account. Cancel and it all stays exactly where it is.</p></div>
         </div>
       </div>
@@ -129,11 +129,13 @@ const description = 'Sondor interviews you, keeps what you said word for word, a
         <div class="plan raised raised--lift">
           <h3>{tiers.basic.name}</h3>
           <p class="price"><span class="amount">${tiers.basic.price}</span><span class="per">/month</span></p>
+          <p class="price-annual">or ${annualPrice(tiers.basic.price)} a year, {annual.label}</p>
           <p>{tiers.basic.summary} Interviews, voice profile, topical map, assembly, repurposing, provenance mark.</p>
         </div>
         <div class="plan raised raised--lift">
           <h3>{tiers.premium.name}</h3>
           <p class="price"><span class="amount">${tiers.premium.price}</span><span class="per">/month</span></p>
+          <p class="price-annual">or ${annualPrice(tiers.premium.price)} a year, {annual.label}</p>
           <p>{tiers.premium.summary} Everything in {tiers.basic.name}, plus more than one brand or voice, transcription of your existing recordings, image generation, and Guest Rundown for interviewing someone else.</p>
         </div>
       </div>
@@ -155,7 +157,7 @@ const description = 'Sondor interviews you, keeps what you said word for word, a
         <details>
           <summary>Is it really my writing, or is AI doing it underneath?</summary>
           <div>
-            <p>AI runs the interview and does the arranging. It does not write the sentences. The finished piece is made of your transcript, and the handful of places where a connecting phrase had to be added are marked and shown to you before they stay. You can open the provenance link on any piece and see exactly which words are yours. It is all of them, plus whatever you approved.</p>
+            <p>AI runs the interview and does the arranging. It does not write the sentences. The finished piece is made of your transcript, and the handful of places where a connecting phrase had to be added are marked and shown to you before they stay. A finished piece can carry a provenance mark reading 100% verbatim, no AI prose, and anything Sondor suggested has to be replaced with your own words before that mark will issue.</p>
           </div>
         </details>
         <details>
@@ -249,6 +251,9 @@ const description = 'Sondor interviews you, keeps what you said word for word, a
   .price { display: flex; align-items: baseline; gap: var(--s-1); font-family: var(--font-display); }
   .amount { font-size: var(--text-h2); line-height: 1; }
   .per { color: var(--text-muted); font-family: var(--font-body); }
+  /* Under the monthly figure, never instead of it. No toggle, so both billing
+     periods stay on screen together. */
+  .price-annual { color: var(--text-muted); font-size: var(--text-sm); }
   .plans-link { margin-block-start: var(--s-10); }
 
   .founder-note { display: grid; gap: var(--s-6); }
