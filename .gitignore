@@ -8,3 +8,4 @@ dist/
 _assets/
 _screens/
 *.log
+.wrangler/

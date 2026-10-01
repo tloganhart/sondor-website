@@ -8,7 +8,9 @@ Two static Astro sites and one shared design system.
 | `sites/beta` | Single-page closed beta landing page with the application form built in. | `beta.sondor.ai` (replaces the live page after review) |
 | `packages/design` | Tokens, fonts, brand assets, shared Astro components, and `config.ts` (prices, tier names, trial facts, cap). | consumed by both |
 
-Static output only. No SSR, no adapter, no Workers runtime, no React. The main site ships zero JavaScript. The beta site ships one small script for the form.
+Static output only. No SSR, no adapter, no React. The main site ships zero JavaScript. The beta site ships one small script for the form.
+
+One exception, server side and invisible to every page: `sites/sondor-ai/functions/verify/[id].js` is a Cloudflare Pages Function on the Workers runtime that passes `/verify/<id>` through to the sondor-app backend, which renders provenance verification pages live. It adds nothing to any page's payload and the pages themselves stay static.
 
 ## Run it
 
@@ -39,6 +41,8 @@ Two Pages projects, both connected to this repo. Same build for each, different 
 
 The `cd ../..` is needed because the workspace root holds the lockfile. Do not bind either custom domain from this repo; that is a dashboard step taken on purpose, later.
 
+Pages looks for a `functions` directory beside the configured root directory, which is why the verification proxy lives at `sites/sondor-ai/functions/` and not at the workspace root. It needs no `wrangler.toml` and no compatibility flag: it uses only standard Web APIs.
+
 ## Environment variables
 
 Every one is optional. Unset means the feature renders nothing or degrades on purpose. Copy `sites/*/.env.example` to `.env` for local use, or set them on the Pages project.
@@ -49,6 +53,7 @@ Every one is optional. Unset means the feature renders nothing or degrades on pu
 | `PUBLIC_CF_ANALYTICS_TOKEN` | both (one token per Pages project) | Renders the Cloudflare Web Analytics beacon. | **unset** |
 | `PUBLIC_NOINDEX` | both | `1` adds `<meta name="robots" content="noindex">` to every page. Set it on the sondor.ai Pages project until launch so the production pages.dev URL stays out of search. | unset |
 | `PUBLIC_SITE_URL` | both | Overrides the canonical origin used in `<link rel="canonical">`, Open Graph URLs and the sitemap. Defaults to `https://sondor.ai` / `https://beta.sondor.ai`. | unset, correct for production |
+| `SONDOR_VERIFY_ORIGIN` | sondor.ai | The sondor-app backend that renders provenance verification pages, for example `https://sondor-app-production.up.railway.app`. Read by `functions/verify/[id].js`. While unset, `/verify/<id>` answers a 502 saying verification is temporarily unavailable, never the site's 404. Not a `PUBLIC_` variable on purpose: it is read server side and never reaches a page. | **unset**, must be set before the backend's `PUBLIC_BASE_URL` is pointed at sondor.ai |
 
 ## Where things are decided once
 
