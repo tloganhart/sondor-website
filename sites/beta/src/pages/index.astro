@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import ApplyForm from '../components/ApplyForm.astro';
 import Mark from '@sondor/design/components/Mark.astro';
-import { beta, tiers, tagline } from '@sondor/design/config';
+import { beta, tiers, tagline, depth } from '@sondor/design/config';
 
 const title = 'Apply for the Sondor closed beta, 100 spots, four weeks';
 const description = 'Sondor is a writing tool that refuses to write for you. It interviews you and builds pieces from your own words. 100 people get four weeks before launch.';
@@ -29,7 +29,7 @@ const description = 'Sondor is a writing tool that refuses to write for you. It 
         <h2>What Sondor is</h2>
       </div>
       <div class="prose">
-        <p>Most AI writing tools work the same way: you type a prompt, they hand you text you never said. Sondor is built to refuse that. It asks you questions instead, follows up on your answers, and keeps everything you say, word for word, in your own Notion workspace. When there is enough material, it assembles a piece out of your transcript. Nothing in it is generated. The rare connecting phrase it needs to add is marked and shown to you before it stays.</p>
+        <p>Most AI writing tools work the same way: you type a prompt, they hand you text you never said. Sondor is built to refuse that. It asks you questions instead, follows up on your answers, and keeps everything you say, word for word, in your own Notion workspace. When there is enough material, it assembles a piece out of your transcript. Nothing in it is generated. Where two thoughts need joining, Sondor asks you for the words.</p>
         <p>The result is your thinking in your phrasing, arranged so it reads well. It is slower than pasting a prompt. That is the point.</p>
         <p class="serif-italic tag">{tagline}</p>
       </div>
@@ -68,7 +68,7 @@ const description = 'Sondor is a writing tool that refuses to write for you. It 
         <h2>What you get for it</h2>
       </div>
       <div class="rows raised raised--tight">
-        <div class="row"><p class="row-label">The tool, early</p><p>Full access to Sondor for the beta, including the {tiers.premium.name} tools, ahead of anyone who is not in the cohort.</p></div>
+        <div class="row"><p class="row-label">The tool, early</p><p>Full access to Sondor for the beta, including the {tiers.premium.name} tools and {depth.weeklyPremium} Depth a week, ahead of anyone who is not in the cohort.</p></div>
         <div class="row"><p class="row-label">A founding rate</p><p>If you subscribe when Sondor launches publicly, you pay the founding rate: ${beta.foundingBasic} a month for {tiers.basic.name} and ${beta.foundingPremium} a month for {tiers.premium.name}, against ${tiers.basic.price} and ${tiers.premium.price} for everyone else. The rate holds for as long as your subscription stays active.</p></div>
         <div class="row"><p class="row-label">A say in it</p><p>The people in this group shape what ships, from the names of the plans to how the interview behaves. That happens on the weekly call, where the person building it is taking notes.</p></div>
       </div>
@@ -106,7 +106,7 @@ const description = 'Sondor is a writing tool that refuses to write for you. It 
       <div class="section-head apply-head">
         <h2>Apply</h2>
         <p id="apply-intro" class="lede">This is early and rough around the edges. Screens will change under you, some things will break, and the person fixing them is the same person reading this form. If that sounds like a reason to wait, wait. If it sounds like the interesting part, apply.</p>
-        <p class="muted">Six required questions and one optional one. Applications are read by hand. Approvals go out by email with an access code and the orientation details, and everyone who is not picked hears back too.</p>
+        <p class="muted">Six required questions and one optional one. Applications are read by hand. Approvals go out by email with the orientation details, and everyone who is not picked hears back too.</p>
       </div>
       <div class="raised form-panel"><ApplyForm /></div>
     </div>

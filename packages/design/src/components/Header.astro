@@ -9,10 +9,16 @@ interface NavLink { href: string; label: string }
 interface Props {
   links: NavLink[];
   cta?: { href: string; label: string };
+  /**
+   * A plain text link for people who already have an account, never a button: the
+   * site keeps exactly one amber button per viewport. Optional so a site that has
+   * no app to send people to (beta) simply omits it and gets nothing.
+   */
+  login?: { href: string; label: string };
   current?: string;
   homeHref?: string;
 }
-const { links, cta, current, homeHref = '/' } = Astro.props;
+const { links, cta, login, current, homeHref = '/' } = Astro.props;
 ---
 <header class="site-header">
   <a class="skip" href="#main">Skip to content</a>
@@ -32,6 +38,7 @@ const { links, cta, current, homeHref = '/' } = Astro.props;
     )}
 
     <div class="actions">
+      {login && <a class="login" href={login.href}>{login.label}</a>}
       {cta && <a class="btn btn-secondary cta-btn" href={cta.href}>{cta.label}</a>}
       {links.length > 0 && (
         <details class="menu">
@@ -41,6 +48,7 @@ const { links, cta, current, homeHref = '/' } = Astro.props;
               {links.map((l) => (
                 <li><a href={l.href} aria-current={current === l.href ? 'page' : undefined}>{l.label}</a></li>
               ))}
+              {login && <li><a href={login.href}>{login.label}</a></li>}
               {cta && <li class="menu-cta"><a class="btn btn-primary" href={cta.href}>{cta.label}</a></li>}
             </ul>
           </nav>
@@ -61,12 +69,17 @@ const { links, cta, current, homeHref = '/' } = Astro.props;
   .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s-6); min-height: 4.25rem; }
   .home { display: inline-flex; align-items: center; min-height: 44px; padding-block: var(--s-2); }
   .nav-desktop ul, .menu ul { list-style: none; padding: 0; margin: 0; display: flex; gap: var(--s-2); }
-  .nav-desktop a, .menu nav a:not(.btn) {
+  /* .login is the header's "Log in" text link. It is added to the SAME rules the
+     nav links use, so its resting, hover and focus treatment cannot drift from
+     theirs: muted text that turns full text color, same transition, same 44px
+     target. On mobile it is hidden here and appears inside the menu instead,
+     where .menu nav a:not(.btn) already styles it. */
+  .nav-desktop a, .menu nav a:not(.btn), .login {
     display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--s-3);
     text-decoration: none; color: var(--text-muted); font-weight: 500; border-radius: var(--radius);
     transition: color var(--dur) var(--ease);
   }
-  .nav-desktop a:hover, .menu nav a:not(.btn):hover, .nav-desktop a[aria-current="page"], .menu nav a[aria-current="page"] { color: var(--text); }
+  .nav-desktop a:hover, .menu nav a:not(.btn):hover, .login:hover, .nav-desktop a[aria-current="page"], .menu nav a[aria-current="page"] { color: var(--text); }
   .nav-desktop a[aria-current="page"] { text-decoration: underline; text-underline-offset: 0.35em; text-decoration-color: var(--rule-strong); }
   .actions { display: flex; align-items: center; gap: var(--s-3); }
   .cta-btn { padding-block: 0.6rem; }
@@ -94,5 +107,6 @@ const { links, cta, current, homeHref = '/' } = Astro.props;
     .nav-desktop { display: none; }
     .menu { display: block; }
     .cta-btn { display: none; }
+    .login { display: none; }
   }
 </style>

@@ -35,6 +35,31 @@ export const annual = {
 
 export const annualPrice = (monthlyPrice: number): number => monthlyPrice * annual.monthsCharged;
 
+/**
+ * Depth, the one currency for AI work beyond an ordinary session (Decision Log,
+ * "One currency (1 Depth = 1 minute of transcription), weekly Depth 400 basic and
+ * 700 premium, Depth packages $15/$25/$45...", Oct 8, 2026; the pricing page must
+ * state each plan's weekly Depth and the per-minute transcription rate, and
+ * showing the package prices publicly was approved Oct 9, 2026).
+ *
+ * THE NUMBERS ARE STARTING VALUES. They are expected to move once real usage is
+ * measured, so every page renders them from here and a later change is one edit.
+ */
+export const depth = {
+  weeklyBasic: 400,
+  weeklyPremium: 700,
+  /** Transcription spends Depth at this many per minute of audio. */
+  perMinuteTranscription: 1,
+  /** Premium only. Each package is full price for everyone, founding members included. */
+  packages: [
+    { amount: 500, price: 15 },
+    { amount: 1000, price: 25 },
+    { amount: 2000, price: 45 },
+  ],
+  /** Purchased Depth lasts this many days from the date of purchase. */
+  packageDays: 30,
+} as const;
+
 export const trial = {
   days: 14,
   cardRequired: false,

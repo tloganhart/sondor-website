@@ -1,9 +1,35 @@
 // Runs Lighthouse (the same engine as PageSpeed Insights) against the built sites on a local server.
 import { createServer } from 'node:http';
+import { existsSync } from 'node:fs';
 import { readFile, stat } from 'node:fs/promises';
+import { platform } from 'node:os';
 import { join, extname } from 'node:path';
 import lighthouse from 'lighthouse';
 import { chromium } from 'playwright';
+
+// Where Chromium lives differs by machine, so it is resolved here rather than hardcoded.
+// The script used to pin the Linux container path, which made it unrunnable on Windows.
+// Order: an explicit CHROMIUM_PATH wins; then the original container path whenever it
+// exists, so the environment this script was first written for behaves exactly as before;
+// then the system Chrome for this platform; then the container path again, so a machine
+// with no browser still fails naming the path that was expected.
+const CONTAINER_CHROMIUM = '/opt/pw-browsers/chromium';
+function resolveChromium() {
+  if (process.env.CHROMIUM_PATH) return process.env.CHROMIUM_PATH;
+  if (existsSync(CONTAINER_CHROMIUM)) return CONTAINER_CHROMIUM;
+  const systemChrome = {
+    win32: [
+      join(process.env.PROGRAMFILES ?? 'C:\\Program Files', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+      join(process.env['PROGRAMFILES(X86)'] ?? 'C:\\Program Files (x86)', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+      join(process.env.LOCALAPPDATA ?? '', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+    ],
+    darwin: ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'],
+    linux: ['/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser'],
+  }[platform()] ?? [];
+  return systemChrome.find((p) => p && existsSync(p)) ?? CONTAINER_CHROMIUM;
+}
+const executablePath = resolveChromium();
+console.log(`Chromium: ${executablePath}`);
 
 const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2', '.xml': 'application/xml', '.webmanifest': 'application/manifest+json' };
 function serve(dist, port) {
@@ -22,7 +48,7 @@ const targets = [
   ['sites/sondor-ai/dist', 4331, '/pricing', 'main-pricing'],
   ['sites/beta/dist', 4332, '/', 'beta'],
 ];
-const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--remote-debugging-port=9333'] });
+const browser = await chromium.launch({ executablePath, args: ['--remote-debugging-port=9333'] });
 const servers = {};
 for (const [dist, port, path, name] of targets) {
   servers[port] ??= await serve(dist, port);

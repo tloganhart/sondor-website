@@ -2,7 +2,7 @@
 import Head from '@sondor/design/components/Head.astro';
 import Header from '@sondor/design/components/Header.astro';
 import Footer from '@sondor/design/components/Footer.astro';
-import { trial, contact } from '@sondor/design/config';
+import { trial, contact, urls } from '@sondor/design/config';
 
 interface Props {
   title: string;
@@ -19,6 +19,9 @@ const nav = [
   { href: '/about', label: 'About' },
 ];
 const cta = { href: trial.url, label: trial.ctaLabel };
+// sondor.ai has no login system of its own. Someone who already has an account, and
+// has forgotten the app's address, needs a way back to it (Project Queue, decided Oct 4, 2026).
+const login = { href: urls.app, label: 'Log in' };
 ---
 <!doctype html>
 <html lang="en">
@@ -26,7 +29,7 @@ const cta = { href: trial.url, label: trial.ctaLabel };
     <Head {title} {description} {canonical} {noindex} analyticsToken={import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN} />
   </head>
   <body>
-    <Header links={nav} {cta} {current} />
+    <Header links={nav} {cta} {login} {current} />
     <main id="main">
       <slot />
     </main>
@@ -38,6 +41,7 @@ const cta = { href: trial.url, label: trial.ctaLabel };
           { href: '/pricing', label: 'Pricing' },
           { href: '/pricing#trial', label: 'Trial terms' },
           { href: trial.url, label: trial.ctaLabel },
+          { href: urls.app, label: 'Open app' },
         ]},
         { heading: 'Company', links: [
           { href: '/about', label: 'About' },

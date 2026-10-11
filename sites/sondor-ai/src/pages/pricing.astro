@@ -2,7 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import Cta from '../components/Cta.astro';
 import SectionHead from '../components/SectionHead.astro';
-import { tiers, trial, annual, annualPrice } from '@sondor/design/config';
+import { tiers, trial, annual, annualPrice, depth } from '@sondor/design/config';
+
+// Depth packages, rendered from config as "500, 1,000 or 2,000" and "$15, $25 or $45"
+// so the FAQ never carries a second typed copy of the amounts or prices.
+const orList = (xs: string[]) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} or ${xs[xs.length - 1]}`);
+const packageAmounts = orList(depth.packages.map((p) => p.amount.toLocaleString('en-US')));
+const packagePrices = orList(depth.packages.map((p) => `$${p.price}`));
 
 const title = 'Sondor pricing, two plans and a 14-day trial with no card';
 const description = 'Two plans, $39 and $59 a month, or $390 and $590 a year for 2 months free. No free tier. A 14-day trial of the Premium tools, no card. Trial terms, plain.';
@@ -31,6 +37,7 @@ const description = 'Two plans, $39 and $59 a month, or $390 and $590 a year for
             <li>Your topical map</li>
             <li>Assembly of finished pieces from your own transcript</li>
             <li>Repurposing the same words into other formats</li>
+            <li>{depth.weeklyBasic} Depth a week for deeper interview turns and web search</li>
             <li>Provenance mark on any finished piece</li>
             <li>Everything stored in your own Notion workspace</li>
             <li>One brand or voice</li>
@@ -45,10 +52,10 @@ const description = 'Two plans, $39 and $59 a month, or $390 and $590 a year for
           <ul class="includes">
             <li>Everything in {tiers.basic.name}</li>
             <li>More than one brand or voice, each with its own profile and map</li>
-            <li>Transcription of audio and video you already have, so old recordings become raw material</li>
+            <li>Transcription of audio and video you already have, at {depth.perMinuteTranscription} Depth per minute, so old recordings become raw material</li>
             <li>Image generation for finished pieces</li>
             <li>Guest Rundown, for interviewing someone else and producing the write-up</li>
-            <li>A larger weekly allowance for the heavier tools</li>
+            <li>{depth.weeklyPremium} Depth a week, and Depth packages if you run out</li>
           </ul>
         </article>
 
@@ -85,8 +92,8 @@ const description = 'Two plans, $39 and $59 a month, or $390 and $590 a year for
           <div><p>No prorated refunds for partial months, and no separate guarantee. The trial exists so you can decide before you pay anything. If something has gone wrong with your billing, email <a href="mailto:hello@sondor.ai">hello@sondor.ai</a> and it will be sorted out. The full position is in the <a href="/terms">terms of service</a>.</p></div>
         </details>
         <details>
-          <summary>What is the weekly allowance?</summary>
-          <div><p>Some features use extra AI processing beyond an ordinary session: transcription, image generation, Guest Rundown, and a few others. Those draw from a weekly allowance that resets each week and does not roll over. Normal conversational sessions are not metered and are always available. If you use up the week's allowance, the heavier features pause until it resets and everything else keeps working. {tiers.premium.name} carries a larger allowance than {tiers.basic.name}.</p></div>
+          <summary>What is Depth?</summary>
+          <div><p>Depth is the one unit Sondor uses for AI work beyond an ordinary session: deeper interview turns, web search, transcription and image generation. {tiers.basic.name} includes {depth.weeklyBasic} Depth a week and {tiers.premium.name} includes {depth.weeklyPremium}. It refreshes every week and does not roll over. Transcription uses {depth.perMinuteTranscription} Depth per minute of audio, and a YouTube video with captions uses none. Before a transcription starts, the app shows what it will cost. Ordinary sessions never stop: if the week's Depth runs out, sessions carry on at the standard level and the Depth features wait for the refresh. On {tiers.premium.name} you can also buy more: {packageAmounts} Depth for {packagePrices}, each lasting {depth.packageDays} days from purchase.</p></div>
         </details>
         <details>
           <summary>Can I switch between {tiers.basic.name} and {tiers.premium.name}?</summary>
