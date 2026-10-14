@@ -14,7 +14,7 @@ export const tiers = {
   premium: {
     name: 'Premium',
     price: 59,
-    summary: 'More than one voice, and the heavier tools.',
+    summary: 'Unlimited brands, more Depth, and your existing recordings.',
   },
 } as const;
 
