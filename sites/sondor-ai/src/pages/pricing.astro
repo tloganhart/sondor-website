@@ -9,6 +9,9 @@ import { tiers, trial, annual, annualPrice, depth } from '@sondor/design/config'
 const orList = (xs: string[]) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} or ${xs[xs.length - 1]}`);
 const packageAmounts = orList(depth.packages.map((p) => p.amount.toLocaleString('en-US')));
 const packagePrices = orList(depth.packages.map((p) => `$${p.price}`));
+// "75% more than Basic", derived from the two weekly allowances so the claim
+// moves with them instead of being a second typed copy that could go stale.
+const premiumOverBasicPercent = Math.round((depth.weeklyPremium / depth.weeklyBasic - 1) * 100);
 
 const title = 'Sondor pricing, two plans and a 14-day trial with no card';
 const description = 'Two plans, $39 and $59 a month, or $390 and $590 a year for 2 months free. No free tier. A 14-day trial of the Premium tools, no card. Trial terms, plain.';
@@ -48,14 +51,12 @@ const description = 'Two plans, $39 and $59 a month, or $390 and $590 a year for
           <h2 id="plan-premium">{tiers.premium.name}</h2>
           <p class="price"><span class="amount">${tiers.premium.price}</span><span class="per">per month</span></p>
           <p class="price-annual">or ${annualPrice(tiers.premium.price)} a year, {annual.label}</p>
-          <p class="plan-summary">{tiers.premium.summary} For people who run more than one brand, who bring existing recordings into the work, or who interview other people.</p>
+          <p class="plan-summary">More than one voice, more Depth, and your existing recordings. For people who run more than one brand or who bring old audio and video into the work.</p>
           <ul class="includes">
             <li>Everything in {tiers.basic.name}</li>
             <li>More than one brand or voice, each with its own profile and map</li>
             <li>Transcription of audio and video you already have, at {depth.perMinuteTranscription} Depth per minute, so old recordings become raw material</li>
-            <li>Image generation for finished pieces</li>
-            <li>Guest Rundown, for interviewing someone else and producing the write-up</li>
-            <li>{depth.weeklyPremium} Depth a week, and Depth packages if you run out</li>
+            <li>{depth.weeklyPremium} Depth a week, {premiumOverBasicPercent}% more than {tiers.basic.name}, and Depth packages if you run out</li>
           </ul>
         </article>
 
@@ -93,7 +94,7 @@ const description = 'Two plans, $39 and $59 a month, or $390 and $590 a year for
         </details>
         <details>
           <summary>What is Depth?</summary>
-          <div><p>Depth is the one unit Sondor uses for AI work beyond an ordinary session: deeper interview turns, web search, transcription and image generation. {tiers.basic.name} includes {depth.weeklyBasic} Depth a week and {tiers.premium.name} includes {depth.weeklyPremium}. It refreshes every week and does not roll over. Transcription uses {depth.perMinuteTranscription} Depth per minute of audio, and a YouTube video with captions uses none. Before a transcription starts, the app shows what it will cost. Ordinary sessions never stop: if the week's Depth runs out, sessions carry on at the standard level and the Depth features wait for the refresh. On {tiers.premium.name} you can also buy more: {packageAmounts} Depth for {packagePrices}, each lasting {depth.packageDays} days from purchase.</p></div>
+          <div><p>Depth is the one unit Sondor uses for AI work beyond an ordinary session: deeper interview turns, web search and transcription. {tiers.basic.name} includes {depth.weeklyBasic} Depth a week and {tiers.premium.name} includes {depth.weeklyPremium}. It refreshes every week and does not roll over. Transcription uses {depth.perMinuteTranscription} Depth per minute of audio, and a YouTube video with captions uses none. Before a transcription starts, the app shows what it will cost. Ordinary sessions never stop: if the week's Depth runs out, sessions carry on at the standard level and the Depth features wait for the refresh. On {tiers.premium.name} you can also buy more: {packageAmounts} Depth for {packagePrices}, each lasting {depth.packageDays} days from purchase.</p></div>
         </details>
         <details>
           <summary>Can I switch between {tiers.basic.name} and {tiers.premium.name}?</summary>
