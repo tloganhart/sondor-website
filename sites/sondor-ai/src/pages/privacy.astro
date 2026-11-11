@@ -1,6 +1,6 @@
 ---
 /**
- * VERBATIM legal text from the Notion page "Privacy Policy & Terms of Service" (Privacy Policy last changed October 9, 2026).
+ * VERBATIM legal text from the Notion page "Privacy Policy & Terms of Service" (Privacy Policy last changed November 10, 2026).
  * Do not edit copy here. Edit the Notion page, then mirror the change.
  */
 import Layout from '../layouts/Layout.astro';
@@ -15,7 +15,7 @@ const description = 'What Sondor collects, what it does not, and where your cont
       <p class="eyebrow">Legal</p>
       <h1>Privacy Policy</h1>
       <LegalBanner />
-      <p class="muted">Last updated: October 9, 2026 (Privacy Policy: how usage records are used)</p>
+      <p class="muted">Last updated: November 10, 2026 (Privacy Policy: what Sondor's servers store and which services receive data)</p>
     </div>
   </section>
 
@@ -23,22 +23,26 @@ const description = 'What Sondor collects, what it does not, and where your cont
     <div class="container narrow prose legal">
 
       <h2>The short version</h2>
-      <p>Sondor helps you write using your own words. The material you create, your interview transcripts, your stories, your finished pieces, is stored in <strong>your own Notion workspace</strong>, under your own Notion account. We don't hold your content on our servers.</p>
+      <p>Sondor helps you write using your own words. The material you create, your interview transcripts, your stories, your finished pieces, is stored in <strong>your own Notion workspace</strong>, under your own Notion account. Sondor's servers also keep some of your words, because a few features need them. Exactly what, and for how long, is below.</p>
       <p>We do hold some things: your account details, the secure connection to your Notion, and records needed to run the service. Details below.</p>
 
       <h2>What we collect</h2>
       <p><strong>Content you create</strong></p>
       <ul>
         <li>Interview transcripts and session material</li>
-        <li>Voice recordings you make in the app</li>
+        <li>Your voice when you dictate, turned into text (Sondor doesn't keep the audio)</li>
+        <li>Audio and video files and YouTube links you import for transcription</li>
         <li>Writing samples and documents you upload or paste</li>
         <li>Content generated from your own words</li>
       </ul>
       <p><strong>Account and operational data</strong></p>
       <ul>
-        <li>Your email address and account credentials</li>
+        <li>Your Notion account and workspace IDs (you sign in with Notion; Sondor has no password of its own)</li>
+        <li>The email address on your Notion account, which Sondor reads from Notion when needed rather than storing it</li>
+        <li>If you applied to the beta: the name, email and answers from your application</li>
         <li>Your encrypted Notion connection token</li>
-        <li>Session records (when you logged in, which device)</li>
+        <li>Sign-in records (when you signed in and were last active)</li>
+        <li>A random install ID the app creates on your device, so sessions on two devices don't clash (not an advertising or hardware ID)</li>
         <li>Subscription and payment status</li>
         <li>Usage records (sessions completed, features used)</li>
       </ul>
@@ -51,22 +55,33 @@ const description = 'What Sondor collects, what it does not, and where your cont
 
       <h2>Where your data actually lives</h2>
       <p>This distinction matters, so we're being precise about it:</p>
-      <p><strong>In your own Notion workspace:</strong> all of your content. Interview transcripts, stories, voice profile, finished pieces, everything Sondor helps you produce. You own it, you can read it directly in Notion without us, and you keep it if you leave.</p>
-      <p><strong>On Sondor's servers:</strong> your account record, your encrypted Notion access token, session records, subscription status, and usage data. This is what's needed to log you in, connect you to your own Notion, and bill you correctly. Usage records also show us how Sondor is used, so we can improve it.</p>
+      <p><strong>In your own Notion workspace:</strong> your content. Interview transcripts, stories, voice profile, finished pieces, everything Sondor helps you produce. You own it, you can read it directly in Notion without us, and you keep it if you leave.</p>
+      <p><strong>On Sondor's servers:</strong> your account record, your encrypted Notion access token, sign-in records, subscription status, and usage data. This is what's needed to log you in, connect you to your own Notion, and bill you correctly. Usage records also show us how Sondor is used, so we can improve it.</p>
+      <p>Some of your words are kept on Sondor's servers too:</p>
+      <ul>
+        <li>While a session is in progress, a copy of it, so you can pause and pick it up on any device. It's deleted when the session ends, or when the piece is finished, archived or deleted.</li>
+        <li>Your answers to a piece's questions, and the passages Sondor's voice learning last read from your writing, so it doesn't learn the same words twice. These stay until you delete your account.</li>
+        <li>Any verification page you choose to publish. It's public by design and stays up.</li>
+      </ul>
+      <p>Feedback you send us goes to Sondor's own Notion workspace with your name and account details, so we can reply.</p>
 
       <h2>Third parties we use</h2>
       <p>Your data passes through these services in the course of running Sondor:</p>
       <ul>
-        <li><strong>Anthropic (Claude)</strong> — processes your session material to conduct interviews and assemble content. Under Anthropic's API terms, material submitted through their API is not used to train their models.</li>
-        <li><strong>Notion</strong> — stores all of your content, in your own workspace, under your own Notion account and their privacy policy.</li>
-        <li><strong>AssemblyAI</strong> — transcribes voice recordings into text.</li>
-        <li><strong>Stripe</strong> — processes payments. We never see or store your full card details.</li>
-        <li><strong>Railway</strong> — hosts our backend servers.</li>
-        <li><strong>Cloudflare</strong> — serves our website.</li>
+        <li><strong>Anthropic (Claude)</strong>: processes your session material to conduct interviews and assemble content. Under Anthropic's API terms, material submitted through their API is not used to train their models.</li>
+        <li><strong>Notion</strong>: stores your content, in your own workspace, under your own Notion account and their privacy policy.</li>
+        <li><strong>AssemblyAI</strong>: transcribes voice into text. Dictation goes from your device straight to AssemblyAI; imported audio and video are sent by our servers.</li>
+        <li><strong>Firecrawl</strong>: when you import a YouTube video, receives its link so we can get the audio.</li>
+        <li><strong>YouTube</strong>: when you import a video, our servers fetch its captions and details.</li>
+        <li><strong>Stripe</strong>: processes payments. We never see or store your full card details.</li>
+        <li><strong>Railway</strong>: hosts our backend servers.</li>
+        <li><strong>Cloudflare</strong>: serves our website and the web app.</li>
+        <li><strong>Google Play</strong>: on Android, shows the prompt asking you to rate Sondor.</li>
+        <li><strong>Sentry</strong>: receives error reports from our servers, with your account ID but not your content.</li>
       </ul>
 
       <h2>Voice recordings</h2>
-      <p>When you record audio in Sondor, it's transcribed to text so the app can work with your words. Recordings are processed by AssemblyAI and handled according to your settings in the app.</p>
+      <p>When you record audio in Sondor, it's transcribed to text so the app can work with your words. Sondor doesn't keep recordings. When you dictate, your audio streams from your device to AssemblyAI and only the text comes back. Audio and video files you import are sent by our servers to AssemblyAI to be transcribed.</p>
 
       <h2>Sensitive material</h2>
       <p>Sondor's interviews can go into personal territory, formative experiences, loss, belief, unresolved tension. That's the point of the tool.</p>
