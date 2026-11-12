@@ -2,7 +2,7 @@
 /**
  * VERBATIM legal text, copied from sites/sondor-ai/src/pages/privacy.astro, which
  * itself mirrors the Notion page "Privacy Policy & Terms of Service" (last updated
- * November 10, 2026). Do not edit copy here. Edit the Notion page, mirror it into the
+ * November 11, 2026). Do not edit copy here. Edit the Notion page, mirror it into the
  * sondor.ai page, then copy it across.
  *
  * WHY A SECOND COPY RATHER THAN A LINK. beta.sondor.ai collects personal data through
@@ -28,7 +28,7 @@ const description = 'What Sondor collects, what it does not, and where your cont
       <p class="eyebrow">Legal</p>
       <h1>Privacy Policy</h1>
       <LegalBanner />
-      <p class="muted">Last updated: November 10, 2026 (Privacy Policy: what Sondor's servers store and which services receive data)</p>
+      <p class="muted">Last updated: November 11, 2026 (Privacy Policy: deleting your account, and more detail on feedback, error reports and imported files)</p>
     </div>
   </section>
 
@@ -74,9 +74,9 @@ const description = 'What Sondor collects, what it does not, and where your cont
       <ul>
         <li>While a session is in progress, a copy of it, so you can pause and pick it up on any device. It's deleted when the session ends, or when the piece is finished, archived or deleted.</li>
         <li>Your answers to a piece's questions, and the passages Sondor's voice learning last read from your writing, so it doesn't learn the same words twice. These stay until you delete your account.</li>
-        <li>Any verification page you choose to publish. It's public by design and stays up.</li>
+        <li>Any verification page you choose to publish. It's public by design and stays up until you delete your account.</li>
       </ul>
-      <p>Feedback you send us goes to Sondor's own Notion workspace with your name and account details, so we can reply.</p>
+      <p>Feedback you send us goes to Sondor's own Notion workspace with details that identify you, so we can reply: your display name, your Sondor account ID and your Notion workspace's name, plus the name and email from your beta application if you sent one.</p>
 
       <h2>Third parties we use</h2>
       <p>Your data passes through these services in the course of running Sondor:</p>
@@ -90,11 +90,11 @@ const description = 'What Sondor collects, what it does not, and where your cont
         <li><strong>Railway</strong>: hosts our backend servers.</li>
         <li><strong>Cloudflare</strong>: serves our website and the web app.</li>
         <li><strong>Google Play</strong>: on Android, shows the prompt asking you to rate Sondor.</li>
-        <li><strong>Sentry</strong>: receives error reports from our servers, with your account ID but not your content.</li>
+        <li><strong>Sentry</strong>: receives error reports from our servers, tagged with your account ID. We remove request contents before a report is sent.</li>
       </ul>
 
       <h2>Voice recordings</h2>
-      <p>When you record audio in Sondor, it's transcribed to text so the app can work with your words. Sondor doesn't keep recordings. When you dictate, your audio streams from your device to AssemblyAI and only the text comes back. Audio and video files you import are sent by our servers to AssemblyAI to be transcribed.</p>
+      <p>When you record audio in Sondor, it's transcribed to text so the app can work with your words. Sondor doesn't keep recordings. When you dictate, your audio streams from your device to AssemblyAI and only the text comes back. Audio and video files you import are sent by our servers to AssemblyAI to be transcribed. Sondor doesn't store the files or links you import; the transcript goes to your Notion. AssemblyAI and Firecrawl handle them under their own policies.</p>
 
       <h2>Sensitive material</h2>
       <p>Sondor's interviews can go into personal territory, formative experiences, loss, belief, unresolved tension. That's the point of the tool.</p>
@@ -106,7 +106,15 @@ const description = 'What Sondor collects, what it does not, and where your cont
       <p>If you revoke it, Sondor loses access, but <strong>your content stays exactly where it is</strong>, in your Notion, untouched. Nothing gets deleted, because it was never ours to delete.</p>
 
       <h2>Deleting your account</h2>
-      <p>You can request account deletion at any time by emailing <a href="mailto:hello@sondor.ai">hello@sondor.ai</a>. We'll delete your account record, your stored connection token, and your session data from our servers.</p>
+      <p>You can delete your account at any time: in the app under Settings > Account, or on the web at sondor.app/delete-account. If you need help, email <a href="mailto:support@sondor.ai">support@sondor.ai</a>.</p>
+      <p>Deleting your account removes it right away, along with what Sondor's servers keep with it: your account record, your stored Notion connection token, sign-in, usage and billing records, sessions in progress, your answers to pieces' questions, the passages voice learning has read, any verification pages you've published, and your beta application if you sent one. Your payment details are removed from Stripe, which keeps a record of past payments.</p>
+      <p>A few things stay:</p>
+      <ul>
+        <li>Feedback you've sent, with the details that identify you removed.</li>
+        <li>A one-way code made from your Notion workspace ID, kept only so a new account on the same workspace doesn't get a second free trial.</li>
+        <li>Error reports and server logs, which are deleted on their usual schedule, within 90 days.</li>
+      </ul>
+      <p>If you have a paid plan, deleting your account ends it immediately and the rest of the period isn't refunded. To use the time you've paid for, cancel your plan first and delete your account after it ends.</p>
       <p>Your content in Notion is unaffected, it's yours, and it stays.</p>
 
       <h2>If Sondor shuts down</h2>
